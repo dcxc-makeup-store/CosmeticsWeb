@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="f764c7d89d7e4dc9a3a438ae11a38e77" Name="Diagram1">
+        <EntityTypeShape EntityType="SmallMarketModel.供应商信息表" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SmallMarketModel.入库表" Width="1.5" PointX="3" PointY="4.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="SmallMarketModel.商品信息表" Width="1.5" PointX="0.75" PointY="4.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="SmallMarketModel.销售表" Width="1.5" PointX="3" PointY="8.25" IsExpanded="true" />
+        <AssociationConnector Association="SmallMarketModel.FK_入库表_供应商信息表" ManuallyRouted="false" />
+        <AssociationConnector Association="SmallMarketModel.FK_入库表_商品信息表" ManuallyRouted="false" />
+        <AssociationConnector Association="SmallMarketModel.FK_销售表_商品信息表" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

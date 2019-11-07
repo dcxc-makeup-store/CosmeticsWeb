@@ -1,0 +1,108 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="SmallMarketModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="供应商信息表">
+    <Key>
+      <PropertyRef Name="供应商编号" />
+    </Key>
+    <Property Name="供应商编号" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="供应商名称" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="联系电话" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="地址" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="邮政编码" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="入库表">
+    <Key>
+      <PropertyRef Name="入库编号" />
+    </Key>
+    <Property Name="入库编号" Type="int" Nullable="false" />
+    <Property Name="商品编号" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="入库数量" Type="int" Nullable="false" />
+    <Property Name="入库时间" Type="datetime" Nullable="false" />
+    <Property Name="入库价格" Type="money" Nullable="false" />
+    <Property Name="供应商编号" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="小计" Type="money" Nullable="false" />
+    <Property Name="失效期" Type="datetime" Nullable="false" />
+    <Property Name="商品规格" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="商品信息表">
+    <Key>
+      <PropertyRef Name="商品编号" />
+    </Key>
+    <Property Name="商品编号" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="商品名称" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="库存数量" Type="int" />
+    <Property Name="产地" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="库存上限" Type="int" />
+    <Property Name="库存下限" Type="int" />
+    <Property Name="商品价格" Type="money" Nullable="false" />
+    <Property Name="商品规格" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="保质期" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="销售表">
+    <Key>
+      <PropertyRef Name="销售编号" />
+    </Key>
+    <Property Name="销售编号" Type="int" Nullable="false" />
+    <Property Name="商品编号" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="销售数量" Type="int" Nullable="false" />
+    <Property Name="销售单价" Type="money" Nullable="false" />
+    <Property Name="销售时间" Type="datetime" Nullable="false" />
+    <Property Name="小计" Type="money" Nullable="false" />
+    <Property Name="失效期" Type="datetime" Nullable="false" />
+    <Property Name="商品规格" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_入库表_供应商信息表">
+    <End Role="供应商信息表" Type="Self.供应商信息表" Multiplicity="1" />
+    <End Role="入库表" Type="Self.入库表" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="供应商信息表">
+        <PropertyRef Name="供应商编号" />
+      </Principal>
+      <Dependent Role="入库表">
+        <PropertyRef Name="供应商编号" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_入库表_商品信息表">
+    <End Role="商品信息表" Type="Self.商品信息表" Multiplicity="1" />
+    <End Role="入库表" Type="Self.入库表" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="商品信息表">
+        <PropertyRef Name="商品编号" />
+      </Principal>
+      <Dependent Role="入库表">
+        <PropertyRef Name="商品编号" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_销售表_商品信息表">
+    <End Role="商品信息表" Type="Self.商品信息表" Multiplicity="1" />
+    <End Role="销售表" Type="Self.销售表" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="商品信息表">
+        <PropertyRef Name="商品编号" />
+      </Principal>
+      <Dependent Role="销售表">
+        <PropertyRef Name="商品编号" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="SmallMarketModelStoreContainer">
+    <EntitySet Name="供应商信息表" EntityType="Self.供应商信息表" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="入库表" EntityType="Self.入库表" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="商品信息表" EntityType="Self.商品信息表" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="销售表" EntityType="Self.销售表" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_入库表_供应商信息表" Association="Self.FK_入库表_供应商信息表">
+      <End Role="供应商信息表" EntitySet="供应商信息表" />
+      <End Role="入库表" EntitySet="入库表" />
+    </AssociationSet>
+    <AssociationSet Name="FK_入库表_商品信息表" Association="Self.FK_入库表_商品信息表">
+      <End Role="商品信息表" EntitySet="商品信息表" />
+      <End Role="入库表" EntitySet="入库表" />
+    </AssociationSet>
+    <AssociationSet Name="FK_销售表_商品信息表" Association="Self.FK_销售表_商品信息表">
+      <End Role="商品信息表" EntitySet="商品信息表" />
+      <End Role="销售表" EntitySet="销售表" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

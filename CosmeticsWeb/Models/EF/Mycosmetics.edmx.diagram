@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="ed2562841d9e41559192aaacf28fe0d0" Name="Diagram1">
+        <EntityTypeShape EntityType="CosmeticsModel.sysdiagrams" Width="1.5" PointX="0.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CosmeticsModel.订单表" Width="1.5" PointX="5.25" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="CosmeticsModel.订单明细表" Width="1.5" PointX="7.5" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="CosmeticsModel.购物车表" Width="1.5" PointX="5.25" PointY="9.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="CosmeticsModel.管理员表" Width="1.5" PointX="3" PointY="13.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="CosmeticsModel.角色表" Width="1.5" PointX="0.75" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="CosmeticsModel.商品类型表" Width="1.5" PointX="3" PointY="16" IsExpanded="true" />
+        <EntityTypeShape EntityType="CosmeticsModel.商品评论表" Width="1.5" PointX="5.25" PointY="17.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="CosmeticsModel.商品信息表" Width="1.5" PointX="5.25" PointY="13.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="CosmeticsModel.用户表" Width="1.5" PointX="3" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="CosmeticsModel.账户记录表" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
+        <AssociationConnector Association="CosmeticsModel.FK_订单表_用户表" ManuallyRouted="false" />
+        <AssociationConnector Association="CosmeticsModel.FK_订单表_账户记录表" ManuallyRouted="false" />
+        <AssociationConnector Association="CosmeticsModel.FK_订单明细表_订单表" ManuallyRouted="false" />
+        <AssociationConnector Association="CosmeticsModel.FK_订单明细表_商品信息表" ManuallyRouted="false" />
+        <AssociationConnector Association="CosmeticsModel.FK_购物车表_用户表" ManuallyRouted="false" />
+        <AssociationConnector Association="CosmeticsModel.FK_商品评论表_管理员表" ManuallyRouted="false" />
+        <AssociationConnector Association="CosmeticsModel.FK_商品信息表_管理员表" ManuallyRouted="false" />
+        <AssociationConnector Association="CosmeticsModel.FK_用户表_角色表1" ManuallyRouted="false" />
+        <AssociationConnector Association="CosmeticsModel.FK_商品信息表_商品类型表" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
