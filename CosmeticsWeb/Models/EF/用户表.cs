@@ -29,12 +29,11 @@ namespace CosmeticsWeb.Models.EF
         public string 个人简介 { get; set; }
         public byte[] 头像 { get; set; }
         public System.DateTime 用户生日 { get; set; }
-        public int 角色ID { get; set; }
+        public string 重置密码 { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<订单表> 订单表 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<购物车表> 购物车表 { get; set; }
-        public virtual 角色表 角色表 { get; set; }
     }
 }

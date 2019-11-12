@@ -29,7 +29,6 @@ namespace CosmeticsWeb.Models.EF
         public string 用户ID { get; set; }
         public string 账户记录ID { get; set; }
         public decimal 订单总金额 { get; set; }
-        public int 下单总数目 { get; set; }
     
         public virtual 用户表 用户表 { get; set; }
         public virtual 账户记录表 账户记录表 { get; set; }

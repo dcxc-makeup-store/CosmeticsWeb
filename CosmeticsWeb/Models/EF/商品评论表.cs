@@ -15,14 +15,12 @@ namespace CosmeticsWeb.Models.EF
     public partial class 商品评论表
     {
         public string 评论ID { get; set; }
-        public string 商品ID { get; set; }
         public string 用户ID { get; set; }
         public string 评论内容 { get; set; }
         public System.DateTime 评论时间 { get; set; }
-        public string 管理员ID { get; set; }
-        public string 回复内容 { get; set; }
-        public System.DateTime 回复时间 { get; set; }
+        public string 订单明细ID { get; set; }
+        public string 父级评论 { get; set; }
     
-        public virtual 管理员表 管理员表 { get; set; }
+        public virtual 订单明细表 订单明细表 { get; set; }
     }
 }

@@ -24,16 +24,16 @@
           <ScalarProperty Name="用户ID" ColumnName="用户ID" />
           <ScalarProperty Name="账户记录ID" ColumnName="账户记录ID" />
           <ScalarProperty Name="订单总金额" ColumnName="订单总金额" />
-          <ScalarProperty Name="下单总数目" ColumnName="下单总数目" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="订单明细表">
       <EntityTypeMapping TypeName="CosmeticsModel.订单明细表">
         <MappingFragment StoreEntitySet="订单明细表">
+          <ScalarProperty Name="备注" ColumnName="备注" />
+          <ScalarProperty Name="商品单价" ColumnName="商品单价" />
           <ScalarProperty Name="订单明细ID" ColumnName="订单明细ID" />
           <ScalarProperty Name="商品数量" ColumnName="商品数量" />
-          <ScalarProperty Name="小计" ColumnName="小计" />
           <ScalarProperty Name="商品ID" ColumnName="商品ID" />
           <ScalarProperty Name="订单号" ColumnName="订单号" />
         </MappingFragment>
@@ -50,24 +50,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="管理员表">
-      <EntityTypeMapping TypeName="CosmeticsModel.管理员表">
-        <MappingFragment StoreEntitySet="管理员表">
-          <ScalarProperty Name="管理员ID" ColumnName="管理员ID" />
-          <ScalarProperty Name="管理员名称" ColumnName="管理员名称" />
-          <ScalarProperty Name="管理员登录密码" ColumnName="管理员登录密码" />
-          <ScalarProperty Name="角色ID" ColumnName="角色ID" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="角色表">
-      <EntityTypeMapping TypeName="CosmeticsModel.角色表">
-        <MappingFragment StoreEntitySet="角色表">
-          <ScalarProperty Name="角色ID" ColumnName="角色ID" />
-          <ScalarProperty Name="角色名" ColumnName="角色名" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="商品类型表">
       <EntityTypeMapping TypeName="CosmeticsModel.商品类型表">
         <MappingFragment StoreEntitySet="商品类型表">
@@ -78,36 +60,33 @@
     <EntitySetMapping Name="商品评论表">
       <EntityTypeMapping TypeName="CosmeticsModel.商品评论表">
         <MappingFragment StoreEntitySet="商品评论表">
+          <ScalarProperty Name="父级评论" ColumnName="父级评论" />
+          <ScalarProperty Name="订单明细ID" ColumnName="订单明细ID" />
           <ScalarProperty Name="评论ID" ColumnName="评论ID" />
-          <ScalarProperty Name="商品ID" ColumnName="商品ID" />
           <ScalarProperty Name="用户ID" ColumnName="用户ID" />
           <ScalarProperty Name="评论内容" ColumnName="评论内容" />
           <ScalarProperty Name="评论时间" ColumnName="评论时间" />
-          <ScalarProperty Name="管理员ID" ColumnName="管理员ID" />
-          <ScalarProperty Name="回复内容" ColumnName="回复内容" />
-          <ScalarProperty Name="回复时间" ColumnName="回复时间" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="商品信息表">
       <EntityTypeMapping TypeName="CosmeticsModel.商品信息表">
         <MappingFragment StoreEntitySet="商品信息表">
+          <ScalarProperty Name="商品品牌" ColumnName="商品品牌" />
           <ScalarProperty Name="商品ID" ColumnName="商品ID" />
           <ScalarProperty Name="商品名称" ColumnName="商品名称" />
           <ScalarProperty Name="商品类型名称" ColumnName="商品类型名称" />
           <ScalarProperty Name="商品单价" ColumnName="商品单价" />
           <ScalarProperty Name="商品库存" ColumnName="商品库存" />
-          <ScalarProperty Name="商品图片" ColumnName="商品图片" />
           <ScalarProperty Name="商品规格" ColumnName="商品规格" />
           <ScalarProperty Name="商品描述" ColumnName="商品描述" />
-          <ScalarProperty Name="商品品牌" ColumnName="商品品牌" />
-          <ScalarProperty Name="管理员ID" ColumnName="管理员ID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="用户表">
       <EntityTypeMapping TypeName="CosmeticsModel.用户表">
         <MappingFragment StoreEntitySet="用户表">
+          <ScalarProperty Name="重置密码" ColumnName="重置密码" />
           <ScalarProperty Name="用户ID" ColumnName="用户ID" />
           <ScalarProperty Name="用户名" ColumnName="用户名" />
           <ScalarProperty Name="登录密码" ColumnName="登录密码" />
@@ -116,7 +95,6 @@
           <ScalarProperty Name="个人简介" ColumnName="个人简介" />
           <ScalarProperty Name="头像" ColumnName="头像" />
           <ScalarProperty Name="用户生日" ColumnName="用户生日" />
-          <ScalarProperty Name="角色ID" ColumnName="角色ID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

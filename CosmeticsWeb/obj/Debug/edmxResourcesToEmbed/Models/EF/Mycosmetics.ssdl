@@ -23,7 +23,6 @@
     <Property Name="用户ID" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="账户记录ID" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="订单总金额" Type="money" Nullable="false" />
-    <Property Name="下单总数目" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="订单明细表">
     <Key>
@@ -31,9 +30,10 @@
     </Key>
     <Property Name="订单明细ID" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="商品数量" Type="int" Nullable="false" />
-    <Property Name="小计" Type="money" Nullable="false" />
+    <Property Name="商品单价" Type="money" Nullable="false" />
     <Property Name="商品ID" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="订单号" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="备注" Type="ntext" Nullable="false" />
   </EntityType>
   <EntityType Name="购物车表">
     <Key>
@@ -44,22 +44,6 @@
     <Property Name="用户ID" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="数量" Type="int" Nullable="false" />
     <Property Name="应付款" Type="money" Nullable="false" />
-  </EntityType>
-  <EntityType Name="管理员表">
-    <Key>
-      <PropertyRef Name="管理员ID" />
-    </Key>
-    <Property Name="管理员ID" Type="nvarchar" MaxLength="50" Nullable="false" />
-    <Property Name="管理员名称" Type="nvarchar" MaxLength="50" Nullable="false" />
-    <Property Name="管理员登录密码" Type="nvarchar" MaxLength="50" Nullable="false" />
-    <Property Name="角色ID" Type="int" Nullable="false" />
-  </EntityType>
-  <EntityType Name="角色表">
-    <Key>
-      <PropertyRef Name="角色ID" />
-    </Key>
-    <Property Name="角色ID" Type="int" Nullable="false" />
-    <Property Name="角色名" Type="nvarchar" MaxLength="50" Nullable="false" />
   </EntityType>
   <EntityType Name="商品类型表">
     <Key>
@@ -72,13 +56,11 @@
       <PropertyRef Name="评论ID" />
     </Key>
     <Property Name="评论ID" Type="nvarchar" MaxLength="50" Nullable="false" />
-    <Property Name="商品ID" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="订单明细ID" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="用户ID" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="评论内容" Type="ntext" Nullable="false" />
     <Property Name="评论时间" Type="datetime" Nullable="false" />
-    <Property Name="管理员ID" Type="nvarchar" MaxLength="50" Nullable="false" />
-    <Property Name="回复内容" Type="ntext" Nullable="false" />
-    <Property Name="回复时间" Type="datetime" Nullable="false" />
+    <Property Name="父级评论" Type="nvarchar" MaxLength="50" Nullable="false" />
   </EntityType>
   <EntityType Name="商品信息表">
     <Key>
@@ -89,11 +71,9 @@
     <Property Name="商品类型名称" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="商品单价" Type="money" Nullable="false" />
     <Property Name="商品库存" Type="int" Nullable="false" />
-    <Property Name="商品图片" Type="image" Nullable="false" />
     <Property Name="商品规格" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="商品描述" Type="ntext" Nullable="false" />
     <Property Name="商品品牌" Type="nvarchar" MaxLength="50" Nullable="false" />
-    <Property Name="管理员ID" Type="nvarchar" MaxLength="50" Nullable="false" />
   </EntityType>
   <EntityType Name="用户表">
     <Key>
@@ -107,7 +87,7 @@
     <Property Name="个人简介" Type="ntext" Nullable="false" />
     <Property Name="头像" Type="image" Nullable="false" />
     <Property Name="用户生日" Type="date" Nullable="false" />
-    <Property Name="角色ID" Type="int" Nullable="false" />
+    <Property Name="重置密码" Type="nvarchar" MaxLength="50" Nullable="false" />
   </EntityType>
   <EntityType Name="账户记录表">
     <Key>
@@ -148,7 +128,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_订单明细表_订单表">
+  <Association Name="FK_订单明细表_订单表1">
     <End Role="订单表" Type="Self.订单表" Multiplicity="1" />
     <End Role="订单明细表" Type="Self.订单明细表" Multiplicity="*" />
     <ReferentialConstraint>
@@ -184,27 +164,15 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_商品评论表_管理员表">
-    <End Role="管理员表" Type="Self.管理员表" Multiplicity="1" />
+  <Association Name="FK_商品评论表_订单明细表">
+    <End Role="订单明细表" Type="Self.订单明细表" Multiplicity="1" />
     <End Role="商品评论表" Type="Self.商品评论表" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="管理员表">
-        <PropertyRef Name="管理员ID" />
+      <Principal Role="订单明细表">
+        <PropertyRef Name="订单明细ID" />
       </Principal>
       <Dependent Role="商品评论表">
-        <PropertyRef Name="管理员ID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_商品信息表_管理员表">
-    <End Role="管理员表" Type="Self.管理员表" Multiplicity="1" />
-    <End Role="商品信息表" Type="Self.商品信息表" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="管理员表">
-        <PropertyRef Name="管理员ID" />
-      </Principal>
-      <Dependent Role="商品信息表">
-        <PropertyRef Name="管理员ID" />
+        <PropertyRef Name="订单明细ID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -220,25 +188,11 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_用户表_角色表1">
-    <End Role="角色表" Type="Self.角色表" Multiplicity="1" />
-    <End Role="用户表" Type="Self.用户表" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="角色表">
-        <PropertyRef Name="角色ID" />
-      </Principal>
-      <Dependent Role="用户表">
-        <PropertyRef Name="角色ID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <EntityContainer Name="CosmeticsModelStoreContainer">
     <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="订单表" EntityType="Self.订单表" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="订单明细表" EntityType="Self.订单明细表" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="购物车表" EntityType="Self.购物车表" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="管理员表" EntityType="Self.管理员表" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="角色表" EntityType="Self.角色表" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="商品类型表" EntityType="Self.商品类型表" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="商品评论表" EntityType="Self.商品评论表" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="商品信息表" EntityType="Self.商品信息表" Schema="dbo" store:Type="Tables" />
@@ -252,7 +206,7 @@
       <End Role="账户记录表" EntitySet="账户记录表" />
       <End Role="订单表" EntitySet="订单表" />
     </AssociationSet>
-    <AssociationSet Name="FK_订单明细表_订单表" Association="Self.FK_订单明细表_订单表">
+    <AssociationSet Name="FK_订单明细表_订单表1" Association="Self.FK_订单明细表_订单表1">
       <End Role="订单表" EntitySet="订单表" />
       <End Role="订单明细表" EntitySet="订单明细表" />
     </AssociationSet>
@@ -264,21 +218,13 @@
       <End Role="用户表" EntitySet="用户表" />
       <End Role="购物车表" EntitySet="购物车表" />
     </AssociationSet>
-    <AssociationSet Name="FK_商品评论表_管理员表" Association="Self.FK_商品评论表_管理员表">
-      <End Role="管理员表" EntitySet="管理员表" />
+    <AssociationSet Name="FK_商品评论表_订单明细表" Association="Self.FK_商品评论表_订单明细表">
+      <End Role="订单明细表" EntitySet="订单明细表" />
       <End Role="商品评论表" EntitySet="商品评论表" />
-    </AssociationSet>
-    <AssociationSet Name="FK_商品信息表_管理员表" Association="Self.FK_商品信息表_管理员表">
-      <End Role="管理员表" EntitySet="管理员表" />
-      <End Role="商品信息表" EntitySet="商品信息表" />
     </AssociationSet>
     <AssociationSet Name="FK_商品信息表_商品类型表" Association="Self.FK_商品信息表_商品类型表">
       <End Role="商品类型表" EntitySet="商品类型表" />
       <End Role="商品信息表" EntitySet="商品信息表" />
-    </AssociationSet>
-    <AssociationSet Name="FK_用户表_角色表1" Association="Self.FK_用户表_角色表1">
-      <End Role="角色表" EntitySet="角色表" />
-      <End Role="用户表" EntitySet="用户表" />
     </AssociationSet>
   </EntityContainer>
 </Schema>

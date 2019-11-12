@@ -24,12 +24,12 @@ namespace CosmeticsWeb.Controllers
         /// <returns></returns>
         public ActionResult Create()
         {
-            var model = new VmAdminTypeCreateModel();
+            var model = new VmAdminTypeCreate();
             //model.商品类型名称 = "aaa"
             return View(model);
         }
         [HttpPost]
-        public ActionResult Create(VmAdminTypeCreateModel model)
+        public ActionResult Create(VmAdminTypeCreate model)
         {
             if (!ModelState.IsValid)
             {

@@ -29,8 +29,6 @@ namespace CosmeticsWeb.Models.EF
         public virtual DbSet<订单表> 订单表 { get; set; }
         public virtual DbSet<订单明细表> 订单明细表 { get; set; }
         public virtual DbSet<购物车表> 购物车表 { get; set; }
-        public virtual DbSet<管理员表> 管理员表 { get; set; }
-        public virtual DbSet<角色表> 角色表 { get; set; }
         public virtual DbSet<商品类型表> 商品类型表 { get; set; }
         public virtual DbSet<商品评论表> 商品评论表 { get; set; }
         public virtual DbSet<商品信息表> 商品信息表 { get; set; }

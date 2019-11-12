@@ -1,0 +1,74 @@
+﻿@model IEnumerable<CosmeticsWeb.Models.EF.商品信息表>
+
+@{ 
+    ViewBag.Title = "化妆品列表";//这个是默认的,ViewBag是一个dynamic类型的对象，可以用来在controller和页面之间传递数据
+}
+<h2>化妆品列表</h2>
+
+<p>
+    @Html.ActionLink("新建化妆品", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.商品ID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.商品名称)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.商品类型名称)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.商品单价)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.商品库存)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.商品规格)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.商品描述)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.商品品牌)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.商品ID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.商品名称)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.商品类型名称)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.商品单价)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.商品库存)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.商品规格)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.商品描述)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.商品品牌)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+        </td>
+    </tr>
+}
+
+</table>
