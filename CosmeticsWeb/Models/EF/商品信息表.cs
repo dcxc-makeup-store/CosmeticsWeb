@@ -32,10 +32,7 @@ namespace CosmeticsWeb.Models.EF
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<订单明细表> 订单明细表 { get; set; }
         public virtual 商品类型表 商品类型表 { get; set; }
-
-        public static implicit operator 商品信息表(商品信息表 v)
-        {
-            throw new NotImplementedException();
-        }
+        
+        
     }
 }

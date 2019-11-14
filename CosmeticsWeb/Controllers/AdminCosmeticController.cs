@@ -1,4 +1,5 @@
 ﻿using CosmeticsWeb.Models.EF;
+using CosmeticsWeb.Models.Main;
 using CosmeticsWeb.Models.ViewModels.AdminCosmetic;
 using System;
 using System.Collections.Generic;
@@ -37,28 +38,34 @@ namespace CosmeticsWeb.Controllers
         [HttpPost]
         public ActionResult Create(VmAdminCosmeticCreate model)
         {
-            if (!ModelState.IsValid)
+            try
             {
+                //输入校验
+                if (!ModelState.IsValid)
+                {
+                    return View(model);
+                }
+                //新增操作 向数据库插入数据
+                var newModel = new 商品信息表();
+
+                newModel.商品ID = Guid.NewGuid().ToString();
+                // 将VmAdminBookCreate类型的model变量里的内容复制到newModel
+                Util.CopyObjectData(model, newModel, "商品ID");
+                //存入数据库
+                var da = new CosmeticsEntities();
+                da.商品信息表.Add(newModel);
+                da.SaveChanges();
+
+                //返回列表页 转向
+                return RedirectToAction("List");
+
+
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError("", ex.Message);
                 return View(model);
             }
-            //新增操作
-            var newModel = new 商品信息表()
-            {
-                商品名称 = model.商品名称,
-                商品类型名称 = model.商品类型名称,
-                商品单价 = model.商品单价,
-                商品规格=model.商品规格,
-                商品库存=model.商品库存,
-                商品描述=model.商品描述,
-                商品品牌=model.商品品牌,
-            };
-            //存入数据库
-            var da = new CosmeticsEntities();
-            da.商品信息表.Add(newModel);
-            da.SaveChanges();
-
-            //返回列表页
-            return RedirectToAction("List");
 
 
         }

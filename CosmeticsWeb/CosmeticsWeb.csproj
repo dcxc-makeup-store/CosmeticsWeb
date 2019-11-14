@@ -221,6 +221,8 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Images\Armani唇釉206.jpg" />
+    <Content Include="Images\public.jpg" />
     <Content Include="Models\EF\Mycosmetics.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Mycosmetics.edmx</DependentUpon>

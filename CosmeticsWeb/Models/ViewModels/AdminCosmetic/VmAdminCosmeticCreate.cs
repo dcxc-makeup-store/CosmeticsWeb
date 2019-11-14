@@ -14,7 +14,7 @@ namespace CosmeticsWeb.Models.ViewModels.AdminCosmetic
     {
         [Required(ErrorMessage = "必填项")]
         [MaxLength(50, ErrorMessage = "长度限制50")]
-        [Remote("RemoteValidateForCosmeticName", "AdminCosmetic", ErrorMessage = "化妆品名已经存在")]
+        [Remote("RemoteValidateForNewCosmeticName", "AdminCosmetic", ErrorMessage = "化妆品名已经存在")]
         public string 商品名称 { get; set; }
 
         [Required(ErrorMessage = "必填项")]
@@ -23,6 +23,7 @@ namespace CosmeticsWeb.Models.ViewModels.AdminCosmetic
 
         [Required(ErrorMessage = "必填项")]
         [Range(1,10000,ErrorMessage ="限定范围1-10000")]
+        [DataType(DataType.Currency, ErrorMessage = "必须是金额数字")]
         public decimal 商品单价 { get; set; }
         public int 商品库存 { get; set; }
         [Required(ErrorMessage = "必填项")]
