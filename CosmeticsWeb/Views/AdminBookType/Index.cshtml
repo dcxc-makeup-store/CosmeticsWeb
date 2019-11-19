@@ -4,30 +4,38 @@
     ViewBag.Title = "类型管理";
 }
 
-<h2>类型管理</h2>
+<h2 class="row text-center">类型管理</h2>
+<hr />
+<div style="text-align:right;">
+    @Html.ActionLink("新增分类", "Create", null, new { @class = "btn btn-default", @style = "padding:0.5em;" })
+</div>
+<hr />
 
-<p>
-    @Html.ActionLink("新增分类", "Create")
-</p>
 <table class="table">
+
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.商品类型名称)
-        </th>
+            <h4>
+                @Html.DisplayNameFor(model => model.商品类型名称)
+            </h4>
+</th>
         <th></th>
     </tr>
 
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.商品类型名称)
+            <h5>
+                @Html.DisplayFor(modelItem => item.商品类型名称)
+            </h5>
         </td>
         <td>
+         <h5>
             <a href="#" class="mya" data="@item.商品类型名称"><i class="glyphicon glyphicon-trash"></i></a>
+        </h5>
         </td>
     </tr>
 }
-
 </table>
 
 <style>

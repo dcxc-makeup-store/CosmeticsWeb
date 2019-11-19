@@ -65,7 +65,7 @@
           <Property Name="用户ID" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="评论内容" Type="ntext" Nullable="false" />
           <Property Name="评论时间" Type="datetime" Nullable="false" />
-          <Property Name="父级评论" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="父级评论" Type="ntext" Nullable="false" />
         </EntityType>
         <EntityType Name="商品信息表">
           <Key>
@@ -304,7 +304,7 @@
           <Property Name="评论内容" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="评论时间" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="订单明细ID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="父级评论" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="父级评论" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="订单明细表" Relationship="CosmeticsModel.FK_商品评论表_订单明细表" FromRole="商品评论表" ToRole="订单明细表" />
         </EntityType>
         <EntityType Name="商品信息表">

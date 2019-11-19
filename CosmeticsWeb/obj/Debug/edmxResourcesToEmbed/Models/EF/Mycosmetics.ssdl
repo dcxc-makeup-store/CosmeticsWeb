@@ -60,7 +60,7 @@
     <Property Name="用户ID" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="评论内容" Type="ntext" Nullable="false" />
     <Property Name="评论时间" Type="datetime" Nullable="false" />
-    <Property Name="父级评论" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="父级评论" Type="ntext" Nullable="false" />
   </EntityType>
   <EntityType Name="商品信息表">
     <Key>

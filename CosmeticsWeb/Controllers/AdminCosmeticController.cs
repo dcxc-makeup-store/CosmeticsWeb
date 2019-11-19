@@ -1,6 +1,7 @@
 ﻿using CosmeticsWeb.Models.EF;
 using CosmeticsWeb.Models.Main;
 using CosmeticsWeb.Models.ViewModels.AdminCosmetic;
+using CosmeticsWeb.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,6 +15,11 @@ namespace CosmeticsWeb.Controllers
     /// </summary>
     public class AdminCosmeticController : Controller
     {
+        private CosmeticService _cosmeticService;
+        public AdminCosmeticController()
+        {
+            _cosmeticService = new CosmeticService();
+        }
         // GET: AdminCosmetic
         public ActionResult Index()
         {
@@ -23,10 +29,18 @@ namespace CosmeticsWeb.Controllers
         /// 所有化妆品列表
         /// </summary>
         /// <returns></returns>
-        public ActionResult List()
+        public ActionResult List(int cosmeticsPerPage=8,int currentPageNo=0)
         {
-            var da = new CosmeticsEntities();
-            var model = da.商品信息表;
+            var service = new CosmeticService();
+            //指定页记录集合
+            var model = _cosmeticService.GetAllByPage(cosmeticsPerPage, currentPageNo);
+          
+            //化妆品的总数量
+           
+            int pageCount = _cosmeticService.GetPageCount(cosmeticsPerPage);
+            //将实际的页数传入View
+            ViewBag.pageCount = pageCount;
+            ViewBag.currentPageNo = currentPageNo;
             return View(model);
         }
 
@@ -45,18 +59,11 @@ namespace CosmeticsWeb.Controllers
                 {
                     return View(model);
                 }
-                //新增操作 向数据库插入数据
-                var newModel = new 商品信息表();
-
-                newModel.商品ID = Guid.NewGuid().ToString();
-                // 将VmAdminBookCreate类型的model变量里的内容复制到newModel
-                Util.CopyObjectData(model, newModel, "商品ID");
-                //存入数据库
-                var da = new CosmeticsEntities();
-                da.商品信息表.Add(newModel);
-                da.SaveChanges();
+                //向数据库插入数据
+                _cosmeticService.Create(model);
 
                 //返回列表页 转向
+             
                 return RedirectToAction("List");
 
 
@@ -76,8 +83,8 @@ namespace CosmeticsWeb.Controllers
         /// <returns></returns>
         public ActionResult RemoteValidateForNewCosmeticName(string 商品名称)
         {
-            var da = new CosmeticsEntities();
-            var answer = !da.商品信息表.Any(m => m.商品名称 == 商品名称);
+            
+            var answer =_cosmeticService.ValidateForNewCosmeticName(商品名称);
             return Json(answer, JsonRequestBehavior.AllowGet);
         }
         

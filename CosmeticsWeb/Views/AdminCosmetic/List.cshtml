@@ -1,37 +1,106 @@
 ﻿@model IEnumerable<CosmeticsWeb.Models.EF.商品信息表>
 
-@{ 
+@{
     ViewBag.Title = "化妆品列表";//这个是默认的,ViewBag是一个dynamic类型的对象，可以用来在controller和页面之间传递数据
 }
 
+@ViewBag.currentPageNo / @ViewBag.pageCount
+
 <h2 class="row text-center">化妆品列表</h2>
-<hr/>
+<hr />
 <div class="row text-right">
-    @Html.ActionLink("新增化妆品", "Create", null, new { @class="btn btn-default"})
+    @Html.ActionLink("新增化妆品", "Create", null, new { @class = "btn btn-default" })
 </div>
-<hr/>
+<hr />
 <div class="row">
-    @foreach(var item in Model)
+    @foreach (var item in Model)
     {
-    <div class="col-md-4">
-        <div class="panel panel-default">
-            <div class="panel-heading">@item.商品名称</div>
-            <div class="panel-body">
-                <p class="row">
-                    <img src="~/Images/Armani唇釉206.jpg" class="col-md-10 col-md-offset-1"/>
-                </p>
-                <p class="row">
-                    <div class="col-md-10 col-md-offset-1">
-                        描述：@item.商品描述
-                    </div>
-                </p>
-                <p class="row">
-                    <div class="col-md-10 col-md-offset-1">
-                        价格：@CosmeticsWeb.Models.Main.Util.ConvertMoneyToString(item.商品单价)元
-                    </div>
-                </p>
+        <div class="col-md-3">
+            <div class="panel panel-default">
+                <div class="panel-heading">@item.商品名称</div>
+                <div class="panel-body">
+                    <p class="row">
+                        <img src="~/Images/Armani唇釉206.jpg" class="col-md-10 col-md-offset-1" />
+                    </p>
+                    <p class="row">
+                        <div class="col-md-10 col-md-offset-1">
+                            描述：@item.商品描述
+                        </div>
+                    </p>
+                    <p class="row">
+                        <div class="col-md-10 col-md-offset-1">
+                            价格：@CosmeticsWeb.Models.Main.Util.ConvertMoneyToString(item.商品单价)元
+                        </div>
+                    </p>
+                </div>
             </div>
         </div>
-     </div>
-        }
+    }
 </div>
+<div class="row text-right">
+    <nav aria-label="Page navigation">
+        <ul class="pagination pagination-lg">
+            @if (ViewBag.currentPageNo == 0)
+            {
+                <li class="disabled">
+                    <a href="#" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+            }
+            else
+            {
+                <li>
+                    @Html.ActionLink("< 上一页", "list", new { currentPageNo = ViewBag.currentPageNo - 1 })
+
+                </li>
+            }
+            @for (int i = 0; i < ViewBag.pageCount; i++)
+            {
+                if (i == ViewBag.currentPageNo)
+                {
+                    <li class="active">
+                        @Html.ActionLink((i + 1).ToString(), "list", new { currentPageNo = i })
+                    </li>
+                }
+                else
+                {
+                    <li class="">
+                        @Html.ActionLink((i + 1).ToString(), "list", new { currentPageNo = i })
+                    </li>
+
+                }
+            }
+            @if (ViewBag.currentPageNo == ViewBag.pageCount - 1)
+            {
+                <li class="disabled">
+                    <a href="#" aria-label="Next">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+            }
+            else
+            {
+                <li>
+                    @Html.ActionLink("下一页 >", "list", new { currentPageNo = ViewBag.currentPageNo + 1 })
+
+                </li>
+            }
+            <li class="totalpage">
+                共 @ViewBag.pageCount 页
+            </li>
+        </ul>
+
+    </nav>
+</div>
+
+<style>
+    .totalpage {
+        font-size: 18px;
+        vertical-align: middle;
+        padding-left: 2em;
+        padding-top: 1em;
+        display: inline;
+        line-height: 20px;
+    }
+</style>
