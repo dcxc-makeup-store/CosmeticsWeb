@@ -72,5 +72,43 @@ namespace CosmeticsWeb.Services
             return !_context.商品信息表.Any(m => m.商品名称 == newCosmeticName);
         }
 
+        /// <summary>
+        /// 已有化妆品名校验（是否已经使用）
+        /// </summary>
+        /// <param name="newCosmeticName"></param>
+        /// <returns></returns>
+        public bool ValidateForOldCosmeticName(string newCosmeticName, string cosmeticId)
+        {
+            return !_context.商品信息表.Any(m => m.商品名称 == newCosmeticName && m.商品ID != cosmeticId);
+        }
+
+        public 商品信息表 GetById(string id)
+        {
+            return _context.商品信息表.FirstOrDefault(m => m.商品ID==id);
+        }
+
+        public VmAdminCosmeticEdit GetEditModelById(string id)
+        {
+            //从数据库中取出相应数据
+            var model = _context.商品信息表.FirstOrDefault(m =>m.商品ID==id);
+            //填充相应ViewModel
+            var newModel = new VmAdminCosmeticEdit();
+            Util.CopyObjectData(model, newModel);
+            return newModel;
+        }
+
+        /// <summary>
+        /// 保存修改信息
+        /// </summary>
+        /// <param name="model"></param>
+        public void Edit(VmAdminCosmeticEdit model)
+        {
+            //向数据库插入数据
+            var newModel = _context.商品信息表.FirstOrDefault(m => m.商品ID == model.商品ID);
+            // 将VmAdminCosmeticEdit类型的model变量里的内容复制到newModel
+            Util.CopyObjectData(model, newModel, "商品ID");
+
+            _context.SaveChanges();
+        }
     }
 }

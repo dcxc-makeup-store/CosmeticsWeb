@@ -30,7 +30,7 @@ namespace CosmeticsWeb.Models.Main
         /// <param name="source">The source object to copy from</param>
         /// <param name="target">The object to copy to</param>
         /// <param name="excludedProperties">A comma delimited list of properties that should not be copied</param>
-        public static void CopyObjectData(object source, object target, string excludedProperties)
+        public static void CopyObjectData(object source, object target, string excludedProperties="")
         {
             //string[] excluded = null;
             var excluded = new List<string>();

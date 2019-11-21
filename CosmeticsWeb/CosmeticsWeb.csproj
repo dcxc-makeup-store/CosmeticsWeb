@@ -203,6 +203,7 @@
     </Compile>
     <Compile Include="Models\Main\Util.cs" />
     <Compile Include="Models\ViewModels\AdminCosmetic\VmAdminCosmeticCreate.cs" />
+    <Compile Include="Models\ViewModels\AdminCosmetic\VmAdminCosmeticEdit.cs" />
     <Compile Include="Models\ViewModels\AdminLogin\VmAdminLogin.cs" />
     <Compile Include="Models\ViewModels\AdminType\VmAdminTypeCreate.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -223,7 +224,26 @@
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Images\Armani唇釉206.jpg" />
+    <Content Include="Images\HFP唇膏.jpg" />
+    <Content Include="Images\KIKO口红.jpg" />
     <Content Include="Images\public.jpg" />
+    <Content Include="Images\曼秀雷敦唇膏.jpg" />
+    <Content Include="Images\纪梵希08.jpg" />
+    <Content Include="Images\纪梵希09.jpg" />
+    <Content Include="Images\纪梵希13.jpg" />
+    <Content Include="Images\纪梵希206.jpg" />
+    <Content Include="Images\迪奥080.jpg" />
+    <Content Include="Images\迪奥756.jpg" />
+    <Content Include="Images\迪奥999.jpg" />
+    <Content Include="Images\阿玛尼206.jpg" />
+    <Content Include="Images\阿玛尼400.jpg" />
+    <Content Include="Images\阿玛尼415.jpg" />
+    <Content Include="Images\雅诗兰黛321.jpg" />
+    <Content Include="Images\雅诗兰黛333.jpg" />
+    <Content Include="Images\雅诗兰黛430.jpg" />
+    <Content Include="Images\魅可CHILI.jpg" />
+    <Content Include="Images\魅可LAYDY DANGER.jpg" />
+    <Content Include="Images\魅可RUBY WOO.jpg" />
     <Content Include="Models\EF\Mycosmetics.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>Mycosmetics.edmx</DependentUpon>
@@ -299,6 +319,8 @@
     <Content Include="Views\AdminCosmetic\_ViewStart.cshtml" />
     <Content Include="Views\AdminCosmetic\Create.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\ViewCosmeticTypeSelector.cshtml" />
+    <Content Include="Views\AdminCosmetic\Detail.cshtml" />
+    <Content Include="Views\AdminCosmetic\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

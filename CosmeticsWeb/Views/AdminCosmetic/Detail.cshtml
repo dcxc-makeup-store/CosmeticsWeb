@@ -1,0 +1,101 @@
+﻿@model CosmeticsWeb.Models.EF.商品信息表
+
+@{
+    ViewBag.Title = "Detail";
+}
+
+<h2>@Model.商品名称</h2>
+<hr />
+
+<div class="row text-right">
+    @Html.ActionLink("编辑信息", "edit", new { @id = Model.商品ID }, new { @class = "btn btn-default" })
+    @Html.ActionLink("上传照片", "edit", new { @id = Model.商品ID }, new { @class = "btn btn-default" })
+    @Html.ActionLink("编辑描述", "edit", new { @id = Model.商品ID }, new { @class = "btn btn-default" })
+    @Html.ActionLink("编辑品牌", "edit", new { @id = Model.商品ID }, new { @class = "btn btn-default" })
+</div>
+<br />
+<div class="row">
+    <div class="col-md-4">
+        <img src="~/Images/public.jpg" class="col-md-10 col-md-offset-1" />
+    </div>
+    <div class="col-md-8">
+        <div>
+
+            <!-- Nav tabs -->
+            <ul class="nav nav-tabs" role="tablist">
+                <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">基本信息</a></li>
+                <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">商品描述</a></li>
+                <li role="presentation"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">品牌介绍</a></li>
+            </ul>
+
+            <!-- Tab panes -->
+            <div class="tab-content">
+                <!-- 基本信息 -->
+                <div role="tabpanel" class="tab-pane active" id="home">
+                    <div>
+                        <dl class="dl-horizontal">
+                            <dt>
+                                @Html.DisplayNameFor(model => model.商品ID)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.商品ID)
+                            </dd>
+
+                            <dt>
+                                @Html.DisplayNameFor(model => model.商品名称)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.商品名称)
+                            </dd>
+
+                            <dt>
+                                @Html.DisplayNameFor(model => model.商品类型名称)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.商品类型名称)
+                            </dd>
+
+                            <dt>
+                                @Html.DisplayNameFor(model => model.商品单价)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.商品单价)
+                            </dd>
+
+                            <dt>
+                                @Html.DisplayNameFor(model => model.商品库存)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.商品库存)
+                            </dd>
+
+                            <dt>
+                                @Html.DisplayNameFor(model => model.商品规格)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.商品规格)
+                            </dd>
+
+                        </dl>
+
+                    </div>
+                </div>
+                <!-- 描述 -->
+                <div role="tabpanel" class="tab-pane" id="profile">
+                    @Html.Raw(Model.商品描述)
+                </div>
+                <!-- 品牌介绍 -->
+                <div role="tabpanel" class="tab-pane" id="messages">
+                    @Html.Raw(Model.商品品牌)
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

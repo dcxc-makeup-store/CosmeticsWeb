@@ -29,14 +29,14 @@ namespace CosmeticsWeb.Controllers
         /// 所有化妆品列表
         /// </summary>
         /// <returns></returns>
-        public ActionResult List(int cosmeticsPerPage=8,int currentPageNo=0)
+        public ActionResult List(int cosmeticsPerPage = 8, int currentPageNo = 0)
         {
             var service = new CosmeticService();
             //指定页记录集合
             var model = _cosmeticService.GetAllByPage(cosmeticsPerPage, currentPageNo);
-          
+
             //化妆品的总数量
-           
+
             int pageCount = _cosmeticService.GetPageCount(cosmeticsPerPage);
             //将实际的页数传入View
             ViewBag.pageCount = pageCount;
@@ -63,7 +63,7 @@ namespace CosmeticsWeb.Controllers
                 _cosmeticService.Create(model);
 
                 //返回列表页 转向
-             
+
                 return RedirectToAction("List");
 
 
@@ -83,10 +83,58 @@ namespace CosmeticsWeb.Controllers
         /// <returns></returns>
         public ActionResult RemoteValidateForNewCosmeticName(string 商品名称)
         {
-            
-            var answer =_cosmeticService.ValidateForNewCosmeticName(商品名称);
+
+            var answer = _cosmeticService.ValidateForNewCosmeticName(商品名称);
             return Json(answer, JsonRequestBehavior.AllowGet);
         }
-        
+
+        /// <summary>
+        /// 对已有类型名称进行检验，如果已经存在返回false
+        /// </summary>
+        /// <param name="商品名称"></param>
+        /// <returns></returns>
+        public ActionResult RemoteValidateForOldCosmeticName(string 商品名称, string 商品ID)
+        {
+
+            var answer = _cosmeticService.ValidateForNewCosmeticName(商品名称);
+            return Json(answer, JsonRequestBehavior.AllowGet);
+        }
+        /// <summary>
+        /// 商品详细页
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public ActionResult Detail(string id)
+        {
+            return View(_cosmeticService.GetById(id));
+        }
+
+        public ActionResult Edit(string id)
+        {
+            return View(_cosmeticService.GetEditModelById(id));
+        }
+
+        [HttpPost]
+        public ActionResult Edit(VmAdminCosmeticEdit model)
+        {
+            try
+            {
+                //输入校验
+                if (!ModelState.IsValid)
+                {
+                    return View(model);
+                }
+                //向数据库插入数据
+                _cosmeticService.Edit(model);
+                //转向
+                return RedirectToAction("Detail", new { id = model.商品ID });
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError("", ex.Message);
+                return View(model);
+            }
+        }
+
     }
 }

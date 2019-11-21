@@ -82,7 +82,7 @@
     <Property Name="商品库存" Type="Int32" Nullable="false" />
     <Property Name="商品规格" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="商品描述" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="商品品牌" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="商品品牌" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
     <NavigationProperty Name="订单明细表" Relationship="Self.FK_订单明细表_商品信息表" FromRole="商品信息表" ToRole="订单明细表" />
     <NavigationProperty Name="商品类型表" Relationship="Self.FK_商品信息表_商品类型表" FromRole="商品信息表" ToRole="商品类型表" />
   </EntityType>

@@ -4,7 +4,7 @@
     ViewBag.Title = "化妆品列表";//这个是默认的,ViewBag是一个dynamic类型的对象，可以用来在controller和页面之间传递数据
 }
 
-@ViewBag.currentPageNo / @ViewBag.pageCount
+
 
 <h2 class="row text-center">化妆品列表</h2>
 <hr />
@@ -15,6 +15,7 @@
 <div class="row">
     @foreach (var item in Model)
     {
+    <a href="/AdminCosmetic/Detail?id=@item.商品ID">
         <div class="col-md-3">
             <div class="panel panel-default">
                 <div class="panel-heading">@item.商品名称</div>
@@ -24,7 +25,7 @@
                     </p>
                     <p class="row">
                         <div class="col-md-10 col-md-offset-1">
-                            描述：@item.商品描述
+                            规格：@item.商品规格
                         </div>
                     </p>
                     <p class="row">
@@ -35,8 +36,9 @@
                 </div>
             </div>
         </div>
-    }
-</div>
+    </a>
+            }
+    </div>
 <div class="row text-right">
     <nav aria-label="Page navigation">
         <ul class="pagination pagination-lg">
@@ -82,7 +84,7 @@
             else
             {
                 <li>
-                    @Html.ActionLink("下一页 >", "list", new { currentPageNo = ViewBag.currentPageNo + 1 })
+                    @Html.ActionLink("下一页 >", "List", new { currentPageNo = ViewBag.currentPageNo + 1 })
 
                 </li>
             }
@@ -99,7 +101,7 @@
         font-size: 18px;
         vertical-align: middle;
         padding-left: 2em;
-        padding-top: 1em;
+        padding-top: 0.5em;
         display: inline;
         line-height: 20px;
     }

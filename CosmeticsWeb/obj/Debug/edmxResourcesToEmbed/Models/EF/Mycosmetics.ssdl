@@ -73,7 +73,7 @@
     <Property Name="商品库存" Type="int" Nullable="false" />
     <Property Name="商品规格" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="商品描述" Type="ntext" Nullable="false" />
-    <Property Name="商品品牌" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="商品品牌" Type="ntext" Nullable="false" />
   </EntityType>
   <EntityType Name="用户表">
     <Key>
