@@ -42,6 +42,7 @@ namespace CosmeticsWeb.Services
         public int GetPageCount(int cosmeticsPerPage)
         {
             int countOfCosmetics = _context.商品信息表.Count();
+            //计算页数
             double dblPageCount = countOfCosmetics / (cosmeticsPerPage*1.0);
             int pageCount = (int)Math.Ceiling(dblPageCount);
             return pageCount;
@@ -58,6 +59,8 @@ namespace CosmeticsWeb.Services
             newModel.商品ID = Guid.NewGuid().ToString();
             // 将VmAdminCosmeticCreate类型的model变量里的内容复制到newModel
             Util.CopyObjectData(model, newModel, "商品ID");
+            newModel.商品描述 = "";
+            newModel.商品品牌 = "";
             _context.商品信息表.Add(newModel);
             _context.SaveChanges();
         }
@@ -109,6 +112,15 @@ namespace CosmeticsWeb.Services
             Util.CopyObjectData(model, newModel, "商品ID");
 
             _context.SaveChanges();
+        }
+        public void EditMessage(VmContentEdit model)
+        {
+            var item = _context.商品信息表.Find(model.Id);
+            if (item != null)
+            {
+                item.商品描述 = model.Content;
+                _context.SaveChanges();
+            }
         }
     }
 }

@@ -4,6 +4,7 @@ using CosmeticsWeb.Models.ViewModels.AdminCosmetic;
 using CosmeticsWeb.Services;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -77,7 +78,7 @@ namespace CosmeticsWeb.Controllers
 
         }
         /// <summary>
-        /// 对新增类型名称进行检验，如果已经存在返回false
+        /// 对新增商品名称进行检验，如果已经存在返回false
         /// </summary>
         /// <param name="商品名称"></param>
         /// <returns></returns>
@@ -96,7 +97,7 @@ namespace CosmeticsWeb.Controllers
         public ActionResult RemoteValidateForOldCosmeticName(string 商品名称, string 商品ID)
         {
 
-            var answer = _cosmeticService.ValidateForNewCosmeticName(商品名称);
+            var answer = _cosmeticService.ValidateForOldCosmeticName(商品名称, 商品ID);
             return Json(answer, JsonRequestBehavior.AllowGet);
         }
         /// <summary>
@@ -109,6 +110,11 @@ namespace CosmeticsWeb.Controllers
             return View(_cosmeticService.GetById(id));
         }
 
+        /// <summary>
+        /// 商品详细描述
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public ActionResult Edit(string id)
         {
             return View(_cosmeticService.GetEditModelById(id));
@@ -136,5 +142,62 @@ namespace CosmeticsWeb.Controllers
             }
         }
 
+        /// <summary>
+        /// 图片上传处理程序
+        /// </summary>
+        /// <returns></returns>
+        [HttpPost]
+        public ActionResult UploadImage()
+        {
+            //商品id
+            string id = Request.Form["id"];
+
+            if (Request.Files.Count > 0)
+            {
+                //有上传文件
+                var file = Request.Files[0];
+                if (file != null)
+                {
+                    //文件扩展名
+                    var ext = Path.GetExtension(file.FileName);
+
+                    //存储的文件名
+                    var newFileName = Server.MapPath("/images") + "\\" + id + ext;
+
+                    //如果文件存在则删除
+                    if (System.IO.File.Exists(newFileName))
+                        System.IO.File.Delete(newFileName);
+                    file.SaveAs(newFileName);
+                }
+            }
+            return RedirectToAction("Detail", new { id = id });
+        }
+
+
+        /// <summary>
+        /// 编辑商品描述
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public ActionResult EditMessage(string id)
+        {
+            var model = _cosmeticService.GetById(id);
+            var newModel = new VmContentEdit()
+            {
+                Id = id,
+                Content = model.商品描述
+            };
+            return View(newModel);
+        }
+
+        [HttpPost]
+        [ValidateInput(false)]
+        public ActionResult EditMessage(VmContentEdit model)
+        {
+            _cosmeticService.EditMessage(model);
+            return RedirectToAction("Detail", new { id = model.Id });
+        }
     }
 }
+
+

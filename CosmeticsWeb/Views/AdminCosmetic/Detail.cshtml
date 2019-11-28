@@ -7,16 +7,18 @@
 <h2>@Model.商品名称</h2>
 <hr />
 
+
+
 <div class="row text-right">
     @Html.ActionLink("编辑信息", "edit", new { @id = Model.商品ID }, new { @class = "btn btn-default" })
-    @Html.ActionLink("上传照片", "edit", new { @id = Model.商品ID }, new { @class = "btn btn-default" })
-    @Html.ActionLink("编辑描述", "edit", new { @id = Model.商品ID }, new { @class = "btn btn-default" })
+    @Html.ActionLink("编辑描述", "EditMessage", new { @id = Model.商品ID }, new { @class = "btn btn-default" })
     @Html.ActionLink("编辑品牌", "edit", new { @id = Model.商品ID }, new { @class = "btn btn-default" })
+    <a href="#" class="btn btn-default" data-toggle="modal" data-target="#myModal">上传照片</a>
 </div>
 <br />
 <div class="row">
     <div class="col-md-4">
-        <img src="~/Images/public.jpg" class="col-md-10 col-md-offset-1" />
+        <img id="cosmeticImage" src="~/Images/public.jpg" class="col-md-10 col-md-offset-1" />
     </div>
     <div class="col-md-8">
         <div>
@@ -99,3 +101,26 @@
     </div>
 </div>
 
+@Html.Partial("UploadImage", Model.商品ID.ToString())
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script>
+        $(document).ready(function() {
+            $(".MyConfirm").click(function() {
+                return confirm("是否确认操作");
+            });
+
+            $("#cosmeticImage").on ("error",(function () {
+                $(this).attr("src", "/Images/public.jpg");
+            }));
+
+            @{
+                var fileName ="/Images/"+ Model.商品ID + ".jpg";
+            }
+
+            $("#cosmeticImage").attr("src", "@fileName");
+        });
+    </script>
+}

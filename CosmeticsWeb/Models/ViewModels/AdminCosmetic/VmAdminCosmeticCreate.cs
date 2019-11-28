@@ -25,11 +25,14 @@ namespace CosmeticsWeb.Models.ViewModels.AdminCosmetic
         [Range(1,10000,ErrorMessage ="限定范围1-10000")]
         [DataType(DataType.Currency, ErrorMessage = "必须是金额数字")]
         public decimal 商品单价 { get; set; }
+        [Required(ErrorMessage = "必填项")]
         public int 商品库存 { get; set; }
         [Required(ErrorMessage = "必填项")]
         public string 商品规格 { get; set; }
+        [Required(ErrorMessage = "必填项")]
         public string 商品描述 { get; set; }
         [Required(ErrorMessage = "必填项")]
         public string 商品品牌 { get; set; }
+
     }
 }

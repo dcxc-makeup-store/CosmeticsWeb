@@ -1,0 +1,29 @@
+﻿﻿@model string
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">上传图片</h4>
+            </div>
+            @using (Html.BeginForm(
+                "UploadImage",
+                "AdminCosmetic",
+                FormMethod.Post,
+                new { enctype = "multipart/form-data" }))
+            {
+                <div class="modal-body">
+                    <input type="file" name="File" />
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                    <input type="submit" value="提交" class="btn btn-default MyConfirm" />
+
+                </div>
+                <input type="hidden" name="id" value="@Model" />
+            }
+        </div>
+    </div>
+</div>

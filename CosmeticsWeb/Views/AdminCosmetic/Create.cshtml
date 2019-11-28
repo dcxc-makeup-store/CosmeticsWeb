@@ -55,7 +55,6 @@
                     @Html.ValidationMessageFor(model => model.商品规格, "", new { @class = "text-danger" })
                 </div>
             </div>
-
             <div class="form-group col-md-6">
                 @Html.LabelFor(model => model.商品描述, htmlAttributes: new { @class = "control-label col-md-3" })
                 <div class="col-md-9">
@@ -63,7 +62,6 @@
                     @Html.ValidationMessageFor(model => model.商品描述, "", new { @class = "text-danger" })
                 </div>
             </div>
-
             <div class="form-group col-md-6">
                 @Html.LabelFor(model => model.商品品牌, htmlAttributes: new { @class = "control-label col-md-3" })
                 <div class="col-md-9">
@@ -71,6 +69,8 @@
                     @Html.ValidationMessageFor(model => model.商品品牌, "", new { @class = "text-danger" })
                 </div>
             </div>
+
+        </div>
         </div>
         <hr />
 
@@ -80,7 +80,7 @@
         <div style="height:300px;">
             &nbsp;
         </div>
-    </div>
+   
 }
 
 
