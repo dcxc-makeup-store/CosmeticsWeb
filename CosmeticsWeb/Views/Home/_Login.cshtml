@@ -1,0 +1,24 @@
+﻿
+@{
+    HttpCookie authCookie = Context.Request.Cookies[FormsAuthentication.FormsCookieName];
+    if (null == authCookie)
+    {
+        <a href="#">登录</a>
+    }
+    else
+    {
+        FormsAuthenticationTicket authTicket = FormsAuthentication.Decrypt(authCookie.Value);
+        if (null == authTicket)
+        {
+            <a href="#">登录</a>
+        }
+        else
+        {
+            FormsIdentity id = new FormsIdentity(authTicket);
+
+            <a href="#">@id.Name</a>
+        }
+    }
+
+}
+

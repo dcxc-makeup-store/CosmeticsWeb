@@ -90,8 +90,8 @@
           <Property Name="手机号" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="邮箱" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="个人简介" Type="ntext" Nullable="false" />
-          <Property Name="头像" Type="image" Nullable="false" />
-          <Property Name="用户生日" Type="date" Nullable="false" />
+          <Property Name="头像" Type="image" />
+          <Property Name="用户生日" Type="date" />
           <Property Name="重置密码" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="账户记录表">
@@ -332,8 +332,8 @@
           <Property Name="手机号" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="邮箱" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="个人简介" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="头像" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
-          <Property Name="用户生日" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="头像" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="用户生日" Type="DateTime" Precision="0" />
           <NavigationProperty Name="订单表" Relationship="Self.FK_订单表_用户表" FromRole="用户表" ToRole="订单表" />
           <NavigationProperty Name="购物车表" Relationship="Self.FK_购物车表_用户表" FromRole="用户表" ToRole="购物车表" />
           <Property Name="重置密码" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />

@@ -1,0 +1,39 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="navbar navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand hidden-sm" href="/">dcxc化妆品小店</a>
+        </div>
+        <div class="navbar-collapse collapse" role="navigation">
+            <ul class="nav navbar-nav">
+                @*<li>@Html.ActionLink("化妆品分类管理", "Index", "AdminBookType")</li>
+                <li>@Html.ActionLink("化妆品管理", "Index", "AdminCosmetic")</li>*@
+            </ul>
+            <ul class="nav navbar-nav navbar-right hidden-sm">
+                <li>
+                    <a href="#">hello</a>
+                </li>
+                <li>
+                    @Html.ActionLink("注册","Register", "Account")
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div>
+    @RenderBody()
+
+</div>
+
+@section Scripts {
+    @RenderSection("scripts", required: false)
+}

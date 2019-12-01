@@ -14,6 +14,7 @@ namespace CosmeticsWeb.Controllers
     /// <summary>
     /// 后台化妆品管理
     /// </summary>
+    [Authorize(Roles = "Admin")]
     public class AdminCosmeticController : Controller
     {
         private CosmeticService _cosmeticService;

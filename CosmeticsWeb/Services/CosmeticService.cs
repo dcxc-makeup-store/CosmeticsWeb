@@ -20,6 +20,41 @@ namespace CosmeticsWeb.Services
             _context = new CosmeticsEntities();
         }
         /// <summary>
+        /// 返回所有记录
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<商品信息表> GetAll()
+        {
+            //根据分页要求，取当前页的记录集合
+            var model = _context.商品信息表.OrderBy(m => m.商品ID);
+            return model;
+        }
+
+        /// <summary>
+        /// 返回指定数量的化妆品 
+        /// </summary>
+        /// <param name="number"></param>
+        /// <returns></returns>
+        public IEnumerable<商品信息表> GetAllByNumber(int number)
+        {
+            //根据分页要求，取当前页的记录集合
+            var model = _context.商品信息表.OrderBy(m => m.商品ID).Take(number);
+            return model;
+        }
+
+        /// <summary>
+        /// 返回含指定名称的化妆品 
+        /// </summary>
+        /// <param name="number"></param>
+        /// <returns></returns>
+        public IEnumerable<商品信息表> GetAllSearchByName(string name)
+        {
+            //根据分页要求，取当前页的记录集合
+            var model = _context.商品信息表.OrderBy(m => m.商品ID).Where(m => m.商品名称.Contains(name));
+            return model;
+        }
+
+        /// <summary>
         /// 根据分页要求，去当前页的记录集合
         /// </summary>
         /// <param name="cosmeticsPerPage">每页记录数</param>

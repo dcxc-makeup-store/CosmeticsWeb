@@ -8,6 +8,7 @@ using System.Web.Mvc;
 
 namespace CosmeticsWeb.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class AdminBookTypeController : Controller
     {
         // GET: AdminBookType

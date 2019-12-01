@@ -85,8 +85,8 @@
     <Property Name="手机号" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="邮箱" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="个人简介" Type="ntext" Nullable="false" />
-    <Property Name="头像" Type="image" Nullable="false" />
-    <Property Name="用户生日" Type="date" Nullable="false" />
+    <Property Name="头像" Type="image" />
+    <Property Name="用户生日" Type="date" />
     <Property Name="重置密码" Type="nvarchar" MaxLength="50" Nullable="false" />
   </EntityType>
   <EntityType Name="账户记录表">
