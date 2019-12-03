@@ -1,4 +1,5 @@
-﻿using CosmeticsWeb.Models.ViewModels.Account;
+﻿using BookStoreWeb.Models.Main;
+using CosmeticsWeb.Models.ViewModels.Account;
 using CosmeticsWeb.Services;
 using System;
 using System.Collections.Generic;
@@ -62,6 +63,30 @@ namespace CosmeticsWeb.Controllers
         public ActionResult RemoteValidateIsNameUsed(string 用户名)
         {
             return Json(!_accountService.IsNameUsed(用户名), JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult Login()
+        {
+            return PartialView();
+        }
+
+        [HttpPost]
+        public ActionResult Login(VmLogin model)
+        {
+            if (!ModelState.IsValid)
+                return PartialView(model);
+            //查数据库，用户是否正确
+            var userNow = _accountService.CheckLogin(model);
+            if (userNow == null)
+            {
+                ModelState.AddModelError("","用户名或密码错误");
+                return PartialView(model);
+            }
+            Session.Add("userNow", userNow);
+            //授权
+            AspFormsAuthentication.SetAuthenticationToken(userNow.用户名, new[] { "Logon" }, true);
+            return View();
+
         }
     }
 }

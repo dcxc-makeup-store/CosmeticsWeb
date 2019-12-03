@@ -15,25 +15,26 @@
         <div class="navbar-collapse collapse" role="navigation">
             <ul class="nav navbar-nav">
                 @*<li>@Html.ActionLink("化妆品分类管理", "Index", "AdminBookType")</li>
-                <li>@Html.ActionLink("化妆品管理", "Index", "AdminCosmetic")</li>*@
+                    <li>@Html.ActionLink("化妆品管理", "Index", "AdminCosmetic")</li>*@
             </ul>
             <ul class="nav navbar-nav navbar-right hidden-sm">
                 <li>
                     <a href="#">hello</a>
                 </li>
                 <li>
-                    @Html.ActionLink("注册","Register", "Account")
+                    @Html.ActionLink("管理员登录", "Index", "AdminLogin")
+
+                </li>
+                <li>
+                    @Html.ActionLink("注册", "Register", "Account")
                 </li>
             </ul>
         </div>
     </div>
 </div>
-
 <div>
     @RenderBody()
-
 </div>
-
 @section Scripts {
     @RenderSection("scripts", required: false)
 }
