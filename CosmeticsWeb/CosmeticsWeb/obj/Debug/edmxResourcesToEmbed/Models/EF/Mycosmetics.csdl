@@ -1,0 +1,106 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="CosmeticModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Cart">
+    <Key>
+      <PropertyRef Name="CartID" />
+    </Key>
+    <Property Name="CartID" Type="Guid" Nullable="false" />
+    <Property Name="CosmeticID" Type="Guid" Nullable="false" />
+    <Property Name="UserID" Type="Guid" Nullable="false" />
+    <Property Name="Amount" Type="Int32" Nullable="false" />
+    <Property Name="Pay" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Comment">
+    <Key>
+      <PropertyRef Name="CommentID" />
+    </Key>
+    <Property Name="CommentID" Type="Guid" Nullable="false" />
+    <Property Name="OrderDetailID" Type="Guid" Nullable="false" />
+    <Property Name="UserID" Type="Guid" Nullable="false" />
+    <Property Name="CommentContent" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="CommentTime" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ParentComment" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Info">
+    <Key>
+      <PropertyRef Name="CosmeticID" />
+    </Key>
+    <Property Name="CosmeticID" Type="Guid" Nullable="false" />
+    <Property Name="CosmeticName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="CosmeticType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Price" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+    <Property Name="Stock" Type="Int32" />
+    <Property Name="Specification" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Logo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="OrderDetail">
+    <Key>
+      <PropertyRef Name="OderDetailID" />
+    </Key>
+    <Property Name="OderDetailID" Type="Guid" Nullable="false" />
+    <Property Name="CosmeticNum" Type="Int32" Nullable="false" />
+    <Property Name="Price" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+    <Property Name="CosmeticID" Type="Guid" Nullable="false" />
+    <Property Name="OrderListID" Type="Guid" Nullable="false" />
+    <Property Name="Remark" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="OrderList">
+    <Key>
+      <PropertyRef Name="OrderListID" />
+    </Key>
+    <Property Name="OrderListID" Type="Guid" Nullable="false" />
+    <Property Name="CustomerName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="CustomerTel" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Addr" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="OrderTime" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ExpectTime" Type="DateTime" Precision="3" />
+    <Property Name="UserID" Type="Guid" Nullable="false" />
+    <Property Name="OrderDetailID" Type="Guid" Nullable="false" />
+    <Property Name="TotalMoney" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Record">
+    <Key>
+      <PropertyRef Name="RecordID" />
+    </Key>
+    <Property Name="RecordID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="RechargeMoney" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="RechargeTime" Type="DateTime" Precision="3" />
+    <Property Name="BeginMoney" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="FinalMoney" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="ExpendMoney" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="MachineTime" Type="DateTime" Precision="3" />
+    <Property Name="Abstract" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Note" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="UserID" Type="Guid" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Type">
+    <Key>
+      <PropertyRef Name="CosmeticType" />
+    </Key>
+    <Property Name="CosmeticType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="UserID" />
+    </Key>
+    <Property Name="UserID" Type="Guid" Nullable="false" />
+    <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="UserTel" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Intro" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Photo" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <Property Name="Birthday" Type="DateTime" Precision="0" />
+    <Property Name="UserName" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+  </EntityType>
+  <EntityContainer Name="CosmeticEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Cart" EntityType="Self.Cart" />
+    <EntitySet Name="Comment" EntityType="Self.Comment" />
+    <EntitySet Name="Info" EntityType="Self.Info" />
+    <EntitySet Name="OrderDetail" EntityType="Self.OrderDetail" />
+    <EntitySet Name="OrderList" EntityType="Self.OrderList" />
+    <EntitySet Name="Record" EntityType="Self.Record" />
+    <EntitySet Name="Type" EntityType="Self.Type" />
+    <EntitySet Name="User" EntityType="Self.User" />
+  </EntityContainer>
+</Schema>

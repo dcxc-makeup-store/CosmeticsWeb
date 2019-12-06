@@ -1,0 +1,127 @@
+﻿@model CosmeticsWeb.Models.EF.Info
+
+@{
+    ViewBag.Title = "Detail";
+}
+
+<h2>@Model.CosmeticName</h2>
+<hr />
+
+<div class="row text-right">
+    @Html.ActionLink("编辑信息", "edit", new { @id = Model.CosmeticID }, new { @class = "btn btn-default" })
+    @Html.ActionLink("编辑描述", "EditCatalog", new { @id = Model.CosmeticID }, new { @class = "btn btn-default" })
+    @Html.ActionLink("编辑品牌", "EditCatalog", new { @id = Model.CosmeticID }, new { @class = "btn btn-default" })
+    <a href="#" class="btn btn-default" data-toggle="modal" data-target="#myModal">上传封面</a>
+</div>
+<br />
+<div class="row">
+    <div class="col-md-4">
+        <img id="cosmeticImage" src="~/Images/public.jpg" class="col-md-10 col-md-offset-1" />
+    </div>
+    <div class="col-md-8">
+        <div>
+
+            <!-- Nav tabs -->
+            <ul class="nav nav-tabs" role="tablist">
+                <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">基本信息</a></li>
+                <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">商品描述</a></li>
+                <li role="presentation"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">品牌介绍</a></li>
+            </ul>
+
+            <!-- Tab panes -->
+            <div class="tab-content">
+                <!-- 基本信息 -->
+                <div role="tabpanel" class="tab-pane active" id="home">
+                    <div>
+                        <dl class="dl-horizontal">
+                            <dt>
+                                @Html.DisplayNameFor(model => model.CosmeticID)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.CosmeticID)
+                            </dd>
+
+                            <dt>
+                                @Html.DisplayNameFor(model => model.CosmeticName)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.CosmeticName)
+                            </dd>
+
+                            <dt>
+                                @Html.DisplayNameFor(model => model.CosmeticType)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.CosmeticType)
+                            </dd>
+
+                            <dt>
+                                @Html.DisplayNameFor(model => model.Price)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.Price)
+                            </dd>
+
+                            <dt>
+                                @Html.DisplayNameFor(model => model.Stock)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.Stock)
+                            </dd>
+
+                            <dt>
+                                @Html.DisplayNameFor(model => model.Specification)
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.Specification)
+                            </dd>
+
+                        </dl>
+
+                    </div>
+                </div>
+                <!-- 描述 -->
+                <div role="tabpanel" class="tab-pane" id="profile">
+
+                    @Html.Raw(Model.Description)
+
+                </div>
+                <!-- 品牌介绍 -->
+                <div role="tabpanel" class="tab-pane" id="messages">
+                    @Html.Raw(Model.Logo)
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@Html.Partial("UploadImage", Model.CosmeticID)
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script>
+        $(document).ready(function ()
+        {
+            $(".MyConfirm").click(function() {
+                return confirm("是否确认操作");
+            });
+
+            $("#cosmeticImage").on("error", (function () {
+                $(this).attr("src", "/Images/public.jpg");
+            }));
+
+            @{
+                var fileName ="/Images/"+ Model.CosmeticID + ".jpg";
+            }
+
+            $("#cosmeticImage").attr("src", "@fileName");
+   
+        });
+    </script>
+
+}

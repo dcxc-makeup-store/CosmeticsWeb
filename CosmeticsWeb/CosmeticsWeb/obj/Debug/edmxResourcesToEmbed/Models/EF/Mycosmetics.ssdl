@@ -1,0 +1,106 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="CosmeticModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Cart">
+    <Key>
+      <PropertyRef Name="CartID" />
+    </Key>
+    <Property Name="CartID" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="CosmeticID" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="UserID" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Amount" Type="int" Nullable="false" />
+    <Property Name="Pay" Type="money" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Comment">
+    <Key>
+      <PropertyRef Name="CommentID" />
+    </Key>
+    <Property Name="CommentID" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="OrderDetailID" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="UserID" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="CommentContent" Type="ntext" />
+    <Property Name="CommentTime" Type="datetime" Nullable="false" />
+    <Property Name="ParentComment" Type="ntext" />
+  </EntityType>
+  <EntityType Name="Info">
+    <Key>
+      <PropertyRef Name="CosmeticID" />
+    </Key>
+    <Property Name="CosmeticID" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="CosmeticName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="CosmeticType" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Price" Type="money" Nullable="false" />
+    <Property Name="Stock" Type="int" />
+    <Property Name="Specification" Type="nvarchar" MaxLength="50" />
+    <Property Name="Description" Type="ntext" />
+    <Property Name="Logo" Type="ntext" />
+  </EntityType>
+  <EntityType Name="OrderDetail">
+    <Key>
+      <PropertyRef Name="OderDetailID" />
+    </Key>
+    <Property Name="OderDetailID" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="CosmeticNum" Type="int" Nullable="false" />
+    <Property Name="Price" Type="money" Nullable="false" />
+    <Property Name="CosmeticID" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="OrderListID" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Remark" Type="ntext" />
+  </EntityType>
+  <EntityType Name="OrderList">
+    <Key>
+      <PropertyRef Name="OrderListID" />
+    </Key>
+    <Property Name="OrderListID" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="CustomerName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="CustomerTel" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Addr" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="OrderTime" Type="datetime" Nullable="false" />
+    <Property Name="ExpectTime" Type="datetime" />
+    <Property Name="UserID" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="OrderDetailID" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="TotalMoney" Type="money" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Record">
+    <Key>
+      <PropertyRef Name="RecordID" />
+    </Key>
+    <Property Name="RecordID" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="RechargeMoney" Type="money" />
+    <Property Name="RechargeTime" Type="datetime" />
+    <Property Name="BeginMoney" Type="money" />
+    <Property Name="FinalMoney" Type="money" />
+    <Property Name="ExpendMoney" Type="money" />
+    <Property Name="MachineTime" Type="datetime" />
+    <Property Name="Abstract" Type="ntext" />
+    <Property Name="Note" Type="ntext" />
+    <Property Name="UserID" Type="uniqueidentifier" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Type">
+    <Key>
+      <PropertyRef Name="CosmeticType" />
+    </Key>
+    <Property Name="CosmeticType" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="UserID" />
+    </Key>
+    <Property Name="UserID" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Password" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="UserTel" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Email" Type="nvarchar" MaxLength="50" />
+    <Property Name="Intro" Type="ntext" />
+    <Property Name="Photo" Type="image" />
+    <Property Name="Birthday" Type="date" />
+    <Property Name="UserName" Type="nchar" MaxLength="10" />
+  </EntityType>
+  <EntityContainer Name="CosmeticModelStoreContainer">
+    <EntitySet Name="Cart" EntityType="Self.Cart" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Comment" EntityType="Self.Comment" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Info" EntityType="Self.Info" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="OrderDetail" EntityType="Self.OrderDetail" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="OrderList" EntityType="Self.OrderList" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Record" EntityType="Self.Record" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Type" EntityType="Self.Type" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+  </EntityContainer>
+</Schema>

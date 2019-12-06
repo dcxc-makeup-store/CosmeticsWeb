@@ -1,0 +1,67 @@
+﻿@model IEnumerable<CosmeticsWeb.Models.EF.Type>
+
+@{
+    ViewBag.Title = "类型管理";
+}
+
+<h2>类型管理</h2>
+
+<p>
+    @Html.ActionLink("新增分类", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.CosmeticType)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.CosmeticType)
+        </td>
+        <td>
+            <a href="#" class="mya" data="@item.CosmeticType"><i class="glyphicon glyphicon-trash"></i></a>
+        </td>
+    </tr>
+}
+
+</table>
+
+<style>
+    .mya{
+        color:red
+    }
+</style>
+
+@section Scripts{
+    <script>//浏览器端执行 与服务器端无关
+        $(document).ready(function () {
+            $(".mya").click(function () {//所有class等于mya的元素被点击的时候执行下端操作
+                if (!confirm("是否确认操作?"))
+                    return;
+                //todelete
+                var typeName = $(this).attr("data");
+                $.ajax({//局部更新 脚本可以和服务器通讯 再返回
+                    url: "/AdminBookType/Delete",
+                    type: "get",
+                    data: { typeName: typeName },
+                    success: function (serverMessage) {
+                        if (serverMessage == false) {
+                            alert("操作失败");
+                        }
+                        else {
+                            alert("操作成功！");
+                            top.location = "/AdminBookType/Index";
+                        }
+                    },
+                    error: function () {
+                        alert("操作失败");
+                    }
+                });
+            })
+        })
+    </script>
+  }

@@ -1,0 +1,172 @@
+﻿@model IEnumerable<CosmeticsWeb.Models.EF.Info>
+
+@{
+    ViewBag.Title = "化妆品列表";//这个是默认的,ViewBag是一个dynamic类型的对象，可以用来在controller和页面之间传递数据
+}
+
+
+
+<h2 class="row text-center">化妆品列表</h2>
+<hr />
+<div class="row text-right">
+    @Html.ActionLink("新增化妆品", "Create", null, new { @class = "btn btn-default" })
+
+</div>
+<hr />
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <a href="/AdminCosmetic/Detail?id=@item.CosmeticID">
+            <div class="col-md-3">
+                <div class="panel panel-default">
+                    <div class="panel-heading">@item.CosmeticName</div>
+                    <div class="panel-body">
+                        <p class="row">
+                            <img src="~/Images/public.jpg" class="col-md-10 col-md-offset-1 imgs" dataid="@item.CosmeticID" />
+                        </p>
+                        <p class="row">
+                            <div class="col-md-10 col-md-offset-1">
+                                规格：@item.Specification
+                            </div>
+                        </p>
+                        <p class="row">
+                            <div class="col-md-10 col-md-offset-1">
+                                价格：@CosmeticsWeb.Models.Main.Util.ConvertMoneyToString(item.Price)元
+                            </div>
+                        </p>
+                        <p class="row">
+                            <div class="col-md-10 col-md-offset-1">
+                                <a href="/AdminCosmetic/Detail?id=@item.CosmeticID">详细</a>
+                                &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp; &nbsp;&nbsp; &nbsp;&nbsp;
+                                <a href="#" class="mya" data="@item.CosmeticName">删除</a>
+                            </div>
+                            <div class="col-md-10 col-md-offset-5">
+                            </div>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </a>
+    }
+</div>
+<div class="row text-right">
+    <nav aria-label="Page navigation">
+        <ul class="pagination pagination-lg">
+            @if (ViewBag.currentPageNo == 0)
+            {
+                <li class="disabled">
+                    <a href="#" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+            }
+            else
+            {
+                <li>
+                    @Html.ActionLink("< 上一页", "list", new { currentPageNo = ViewBag.currentPageNo - 1 })
+
+                </li>
+            }
+            @for (int i = 0; i < ViewBag.pageCount; i++)
+            {
+                if (i == ViewBag.currentPageNo)
+                {
+                    <li class="active">
+                        @Html.ActionLink((i + 1).ToString(), "list", new { currentPageNo = i })
+                    </li>
+                }
+                else
+                {
+                    <li class="">
+                        @Html.ActionLink((i + 1).ToString(), "list", new { currentPageNo = i })
+                    </li>
+
+                }
+            }
+            @if (ViewBag.currentPageNo == ViewBag.pageCount - 1)
+            {
+                <li class="disabled">
+                    <a href="#" aria-label="Next">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+            }
+            else
+            {
+                <li>
+                    @Html.ActionLink("下一页 >", "List", new { currentPageNo = ViewBag.currentPageNo + 1 })
+
+                </li>
+            }
+            <li class="totalpage">
+                共 @ViewBag.pageCount 页
+            </li>
+        </ul>
+
+    </nav>
+</div>
+
+<style>
+    .totalpage {
+        font-size: 18px;
+        vertical-align: middle;
+        padding-left: 2em;
+        padding-top: 0.5em;
+        display: inline;
+        line-height: 20px;
+    }
+</style>
+
+    <style>
+        .mya {
+            color: dodgerblue;
+        }
+    </style>
+    @section Scripts {
+
+
+        <script>
+            $(document).ready(function () {
+                $(".mya").click(function () {
+                    if (!confirm("是否确认操作?"))
+                        return;
+                    //todelete
+                    var CosmeticName = $(this).attr("data");
+                    $.ajax({
+                        url: "/AdminCosmetic/delete",
+                        type: "get",
+                        data: { CosmeticName: CosmeticName },
+                        success: function (serverMessage) {
+                            if (serverMessage == false) {
+                                alert("操作失败");
+                            }
+                            else {
+                                alert("操作成功！");
+                                top.location = "/AdminCosmetic/List";
+                            }
+                        },
+                        error: function () {
+                            alert("操作失败");
+                        }
+                    });
+
+
+
+                })
+
+                $(".imgs").each(function () {
+                    var id = $(this).attr("dataid");
+
+                    $(this).on("error",
+                        function () {
+                            $(this).attr("src", "/Images/public.jpg");
+                        });
+
+
+                    var fileName = "/images/" + id + ".jpg";
+
+                    $(this).attr("src", fileName);
+                })
+            })
+        </script>
+    }

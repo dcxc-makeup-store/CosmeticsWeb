@@ -1,0 +1,7 @@
+﻿@model string
+    <select name="CosmeticType" class="form-control">
+            @foreach(var item in CosmeticsWeb.Models.Main.Util.AllCosmeticTypes())
+            {
+                <option value="@item">@item</option>
+            }
+    </select>
