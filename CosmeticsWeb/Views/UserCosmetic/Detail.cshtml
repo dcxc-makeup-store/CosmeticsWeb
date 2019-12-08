@@ -1,0 +1,157 @@
+﻿@model CosmeticsWeb.Models.EF.Info
+
+@{
+    ViewBag.Title = "Detail";
+}
+
+<h2>@Model.CosmeticName</h2>
+<hr />
+
+<div class="row text-right">
+
+</div>
+<br />
+<div class="row">
+    <div class="col-md-4">
+        <div class="row">
+            <img src="~/Images/public.jpg" class="col-md-10 col-md-offset-1" id="cosmeticImage" />
+        </div>
+        <div class="row">
+            <!--购物车-->
+            <form class="form-inline">
+                <div class="form-group">
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <div class="input-group">
+                        <input style="width:10em;" type="text" class="form-control" id="inputAmount" placeholder="Amount" value="1">
+                    </div>
+                </div>
+                <button type="button" class="btn btn-default" id="bplus">+</button>
+                <button type="button" class="btn btn-default" id="bminus">-</button>
+                <button type="button" class="btn btn-primary" id="bsubmit">加入购物车</button>
+            </form>
+        </div>
+    </div>
+    <div class="col-md-8">
+
+
+        <div>
+            <dl class="dl-horizontal">
+                
+                <dt>
+                    @Html.DisplayNameFor(model => model.CosmeticName)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.CosmeticName)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.CosmeticType)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.CosmeticType)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Price)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Price)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Stock)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Stock)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Specification)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Specification)
+                </dd>
+
+            </dl>
+
+        </div>
+        <div>
+
+            <!-- Nav tabs -->
+            <ul class="nav nav-tabs" role="tablist">
+                <li role="presentation" class="active"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">描述</a></li>
+                <li role="presentation"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">品牌</a></li>
+            </ul>
+            <!-- Tab panes -->
+            <div class="tab-content">
+                <!-- 描述 -->
+                <div role="tabpanel" class="tab-pane" id="profile">
+
+                    @Html.Raw(Model.Description)
+
+                </div>
+                <!-- 品牌介绍 -->
+                <div role="tabpanel" class="tab-pane" id="messages">
+                    @Html.Raw(Model.Logo)
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script>
+        $(document).ready(function ()
+        {
+            $("#cosmeticImage").on("error", (function () {
+                $(this).attr("src", "/Images/public.jpg");
+            }));
+            @{
+                var fileName ="/Images/"+ Model.CosmeticID + ".jpg";
+            }
+            $("#cosmeticImage").attr("src", "@fileName");
+            $("#bplus").click(function () {
+                var number = Number($("#inputAmount").val());
+                $("#inputAmount").val(number + 1);
+            })
+            $("#bminus").click(function () {
+                var number = Number($("#inputAmount").val());
+                if(number>1)
+                    $("#inputAmount").val(number - 1);
+            })
+            $("#bsubmit").click(function () {
+                var amount = Number($("#inputAmount").val());
+                var cosmeticId = '@Model.CosmeticID';
+                var cosmeticName = '@Model.CosmeticName';
+                 var price= '@Model.Price';
+                var data = {
+                    amount,
+                    cosmeticId,
+                    cosmeticName,
+                    price
+                }
+                $.ajax({
+                    url: "/Cart/AddItem",
+                    type: "post",
+                    data: data,
+                    catch: false,
+                    async: false,
+                    success: function () {
+                        //成功
+                        $("#cartarea").load("/cart/showMyCart");
+                },
+                    error: function () {
+                        alert("加入购物车失败")
+                    }
+                });
+            })
+        });
+    </script>
+}

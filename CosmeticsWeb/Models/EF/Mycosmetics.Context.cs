@@ -25,14 +25,14 @@ namespace CosmeticsWeb.Models.EF
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<Cart> Cart { get; set; }
+        public virtual DbSet<Comment> Comment { get; set; }
+        public virtual DbSet<Info> Info { get; set; }
+        public virtual DbSet<OrderDetail> OrderDetail { get; set; }
+        public virtual DbSet<OrderList> OrderList { get; set; }
+        public virtual DbSet<Record> Record { get; set; }
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
-        public virtual DbSet<订单表> 订单表 { get; set; }
-        public virtual DbSet<订单明细表> 订单明细表 { get; set; }
-        public virtual DbSet<购物车表> 购物车表 { get; set; }
-        public virtual DbSet<商品类型表> 商品类型表 { get; set; }
-        public virtual DbSet<商品评论表> 商品评论表 { get; set; }
-        public virtual DbSet<商品信息表> 商品信息表 { get; set; }
-        public virtual DbSet<用户表> 用户表 { get; set; }
-        public virtual DbSet<账户记录表> 账户记录表 { get; set; }
+        public virtual DbSet<Type> Type { get; set; }
+        public virtual DbSet<User> User { get; set; }
     }
 }

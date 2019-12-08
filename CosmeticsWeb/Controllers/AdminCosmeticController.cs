@@ -81,24 +81,24 @@ namespace CosmeticsWeb.Controllers
         /// <summary>
         /// 对新增商品名称进行检验，如果已经存在返回false
         /// </summary>
-        /// <param name="商品名称"></param>
+        /// <param name="CosmeticName"></param>
         /// <returns></returns>
-        public ActionResult RemoteValidateForNewCosmeticName(string 商品名称)
+        public ActionResult RemoteValidateForNewCosmeticName(string CosmeticName)
         {
 
-            var answer = _cosmeticService.ValidateForNewCosmeticName(商品名称);
+            var answer = _cosmeticService.ValidateForNewCosmeticName(CosmeticName);
             return Json(answer, JsonRequestBehavior.AllowGet);
         }
 
         /// <summary>
         /// 对已有类型名称进行检验，如果已经存在返回false
         /// </summary>
-        /// <param name="商品名称"></param>
+        /// <param name="CosmeticName"></param>
         /// <returns></returns>
-        public ActionResult RemoteValidateForOldCosmeticName(string 商品名称, string 商品ID)
+        public ActionResult RemoteValidateForOldCosmeticName(string CosmeticName, System.Guid CosmeticID)
         {
 
-            var answer = _cosmeticService.ValidateForOldCosmeticName(商品名称, 商品ID);
+            var answer = _cosmeticService.ValidateForOldCosmeticName(CosmeticName, CosmeticID);
             return Json(answer, JsonRequestBehavior.AllowGet);
         }
         /// <summary>
@@ -106,7 +106,7 @@ namespace CosmeticsWeb.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public ActionResult Detail(string id)
+        public ActionResult Detail(System.Guid id)
         {
             return View(_cosmeticService.GetById(id));
         }
@@ -116,7 +116,7 @@ namespace CosmeticsWeb.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public ActionResult Edit(string id)
+        public ActionResult Edit(System.Guid id)
         {
             return View(_cosmeticService.GetEditModelById(id));
         }
@@ -134,7 +134,7 @@ namespace CosmeticsWeb.Controllers
                 //向数据库插入数据
                 _cosmeticService.Edit(model);
                 //转向
-                return RedirectToAction("Detail", new { id = model.商品ID });
+                return RedirectToAction("Detail", new { id = model.CosmeticID });
             }
             catch (Exception ex)
             {
@@ -180,13 +180,13 @@ namespace CosmeticsWeb.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public ActionResult EditMessage(string id)
+        public ActionResult EditMessage(System.Guid id)
         {
             var model = _cosmeticService.GetById(id);
             var newModel = new VmContentEdit()
             {
                 Id = id,
-                Content = model.商品描述
+                Content = model.Description
             };
             return View(newModel);
         }

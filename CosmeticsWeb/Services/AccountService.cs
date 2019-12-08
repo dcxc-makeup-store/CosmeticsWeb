@@ -8,9 +8,6 @@ using System.Web;
 
 namespace CosmeticsWeb.Services
 {
-    /// <summary>
-    /// 帐户相关服务
-    /// </summary>
     public class AccountService
     {
         private CosmeticsEntities _context;
@@ -21,32 +18,37 @@ namespace CosmeticsWeb.Services
 
         public bool IsNameUsed(string name)
         {
-            return _context.用户表.Any(m => m.用户名 == name);
+            return _context.User.Any(m => m.UserName == name);
         }
 
         public void Create(VmRegister model)
         {
-            var newUser = new 用户表()
+            var newUser = new User()
             {
-                用户ID = Guid.NewGuid().ToString()
-
+                Password = "000000"
             };
             Util.CopyObjectData(model, newUser);
-            newUser.登录密码 = Util.StringToMD5Hash(newUser.登录密码);
-            _context.用户表.Add(newUser);
-            _context.SaveChanges();
+          
+            _context.Configuration.ValidateOnSaveEnabled = false;
+            _context.User.Add(newUser);
+            try
+            {
+                _context.SaveChanges();
+            }
+            catch (Exception e)
+            {
+                throw e.InnerException;
+            }
         }
-       
-        public 用户表 CheckLogin(VmLogin model)
+        public User CheckLogin(VmLogin model)
         {
             var uid = model.Uid;
-            var pwd = Util.StringToMD5Hash(model.Pwd);//散列算法
-            //如果存在满足条件的记录，则返回第一条
-            //如果不存在，返回null
-            //Lamda表达式
-            var item = _context.用户表.FirstOrDefault(m=>m.用户名=uid m.登录密码=pwd);
+            var pwd =model.Pwd;//散列
+                                              //如果存在满足条件的记录，则返回第一条
+                                              //如果不存在，返回null
+                                              // Lamda表达式 Linq for sql
+            var item = _context.User.FirstOrDefault(m => m.UserName == uid && m.Password == pwd);
             return item;
         }
-
     }
 }

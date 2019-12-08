@@ -16,7 +16,7 @@ namespace CosmeticsWeb.Controllers
         {
 
             var da = new CosmeticsEntities();
-            var model = da.商品类型表;
+            var model = da.Type;
             return View(model);
         }
         /// <summary>
@@ -37,29 +37,28 @@ namespace CosmeticsWeb.Controllers
                 return View(model);
             }
             //新增操作
-            var newModel = new 商品类型表()
+            var newModel = new Models.EF.Type()
             {
-                商品类型名称 = model.商品类型名称
+                CosmeticType = model.CosmeticName
             };
             //存入数据库
             var da = new CosmeticsEntities();
-            da.商品类型表.Add(newModel);
+            da.Type.Add(newModel);
             da.SaveChanges();
 
             //返回列表页
             return RedirectToAction("index");
 
-
         }
         /// <summary>
         /// 对新增类型名称进行检验，如果已经存在返回false
         /// </summary>
-        /// <param name="商品类型名称"></param>
+        /// <param name="CosmeticType"></param>
         /// <returns></returns>
-        public ActionResult RemoteValidateForNewType(string 商品类型名称)
+        public ActionResult RemoteValidateForNewType(string CosmeticType)
         {
             var da = new CosmeticsEntities();
-            var answer = !da.商品类型表.Any(m => m.商品类型名称 == 商品类型名称);
+            var answer = !da.Type.Any(m => m.CosmeticType == CosmeticType);
             return Json(answer, JsonRequestBehavior.AllowGet);
         }
 
@@ -68,18 +67,19 @@ namespace CosmeticsWeb.Controllers
             try
             {
                 var da = new CosmeticsEntities();
-                var model = da.商品类型表.FirstOrDefault(m => m.商品类型名称 == typeName);
+                var model = da.Type.FirstOrDefault(m => m.CosmeticType == typeName);
                 if (model == null)
                 {
                     //没有对应记录
                     return Json(false, JsonRequestBehavior.AllowGet);
                 }
                 //检查这个分类名称是否已经使用
-                if(da.商品信息表.Any(m=>m.商品类型名称== typeName))
+              
+                if (da.Info.Any(m => m.CosmeticType == typeName))
                 {
                     return Json(false, JsonRequestBehavior.AllowGet);
                 }
-                da.商品类型表.Remove(model);
+                da.Type.Remove(model);
                 da.SaveChanges();
                 return Json(true, JsonRequestBehavior.AllowGet);
             }

@@ -1,6 +1,86 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
   <EntityContainerMapping StorageEntityContainer="CosmeticsModelStoreContainer" CdmEntityContainer="CosmeticsEntities">
+    <EntitySetMapping Name="Cart">
+      <EntityTypeMapping TypeName="CosmeticsModel.Cart">
+        <MappingFragment StoreEntitySet="Cart">
+          <ScalarProperty Name="CartID" ColumnName="CartID" />
+          <ScalarProperty Name="CosmeticID" ColumnName="CosmeticID" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="Pay" ColumnName="Pay" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Comment">
+      <EntityTypeMapping TypeName="CosmeticsModel.Comment">
+        <MappingFragment StoreEntitySet="Comment">
+          <ScalarProperty Name="CommentID" ColumnName="CommentID" />
+          <ScalarProperty Name="OrderDetailID" ColumnName="OrderDetailID" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="CommentContent" ColumnName="CommentContent" />
+          <ScalarProperty Name="CommentTime" ColumnName="CommentTime" />
+          <ScalarProperty Name="ParentComment" ColumnName="ParentComment" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Info">
+      <EntityTypeMapping TypeName="CosmeticsModel.Info">
+        <MappingFragment StoreEntitySet="Info">
+          <ScalarProperty Name="CosmeticID" ColumnName="CosmeticID" />
+          <ScalarProperty Name="CosmeticName" ColumnName="CosmeticName" />
+          <ScalarProperty Name="CosmeticType" ColumnName="CosmeticType" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="Stock" ColumnName="Stock" />
+          <ScalarProperty Name="Specification" ColumnName="Specification" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Logo" ColumnName="Logo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="OrderDetail">
+      <EntityTypeMapping TypeName="CosmeticsModel.OrderDetail">
+        <MappingFragment StoreEntitySet="OrderDetail">
+          <ScalarProperty Name="OrderDetailID" ColumnName="OrderDetailID" />
+          <ScalarProperty Name="CosmeticNum" ColumnName="CosmeticNum" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="CosmeticID" ColumnName="CosmeticID" />
+          <ScalarProperty Name="OrderListID" ColumnName="OrderListID" />
+          <ScalarProperty Name="Remark" ColumnName="Remark" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="OrderList">
+      <EntityTypeMapping TypeName="CosmeticsModel.OrderList">
+        <MappingFragment StoreEntitySet="OrderList">
+          <ScalarProperty Name="OrderListID" ColumnName="OrderListID" />
+          <ScalarProperty Name="CustomerName" ColumnName="CustomerName" />
+          <ScalarProperty Name="CustomerTel" ColumnName="CustomerTel" />
+          <ScalarProperty Name="Addr" ColumnName="Addr" />
+          <ScalarProperty Name="OrderTime" ColumnName="OrderTime" />
+          <ScalarProperty Name="ExpectTime" ColumnName="ExpectTime" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="OrderDetailID" ColumnName="OrderDetailID" />
+          <ScalarProperty Name="TotalMoney" ColumnName="TotalMoney" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Record">
+      <EntityTypeMapping TypeName="CosmeticsModel.Record">
+        <MappingFragment StoreEntitySet="Record">
+          <ScalarProperty Name="RecordID" ColumnName="RecordID" />
+          <ScalarProperty Name="RechargeMoney" ColumnName="RechargeMoney" />
+          <ScalarProperty Name="RechargeTime" ColumnName="RechargeTime" />
+          <ScalarProperty Name="BeginMoney" ColumnName="BeginMoney" />
+          <ScalarProperty Name="FinalMoney" ColumnName="FinalMoney" />
+          <ScalarProperty Name="ExpendMoney" ColumnName="ExpendMoney" />
+          <ScalarProperty Name="MachineTime" ColumnName="MachineTime" />
+          <ScalarProperty Name="Abstract" ColumnName="Abstract" />
+          <ScalarProperty Name="Note" ColumnName="Note" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="sysdiagrams">
       <EntityTypeMapping TypeName="CosmeticsModel.sysdiagrams">
         <MappingFragment StoreEntitySet="sysdiagrams">
@@ -12,105 +92,23 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="订单表">
-      <EntityTypeMapping TypeName="CosmeticsModel.订单表">
-        <MappingFragment StoreEntitySet="订单表">
-          <ScalarProperty Name="订单号" ColumnName="订单号" />
-          <ScalarProperty Name="收货人" ColumnName="收货人" />
-          <ScalarProperty Name="收货人电话" ColumnName="收货人电话" />
-          <ScalarProperty Name="收货人地址" ColumnName="收货人地址" />
-          <ScalarProperty Name="订单时间" ColumnName="订单时间" />
-          <ScalarProperty Name="预计交货时间" ColumnName="预计交货时间" />
-          <ScalarProperty Name="用户ID" ColumnName="用户ID" />
-          <ScalarProperty Name="账户记录ID" ColumnName="账户记录ID" />
-          <ScalarProperty Name="订单总金额" ColumnName="订单总金额" />
+    <EntitySetMapping Name="Type">
+      <EntityTypeMapping TypeName="CosmeticsModel.Type">
+        <MappingFragment StoreEntitySet="Type">
+          <ScalarProperty Name="CosmeticType" ColumnName="CosmeticType" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="订单明细表">
-      <EntityTypeMapping TypeName="CosmeticsModel.订单明细表">
-        <MappingFragment StoreEntitySet="订单明细表">
-          <ScalarProperty Name="备注" ColumnName="备注" />
-          <ScalarProperty Name="商品单价" ColumnName="商品单价" />
-          <ScalarProperty Name="订单明细ID" ColumnName="订单明细ID" />
-          <ScalarProperty Name="商品数量" ColumnName="商品数量" />
-          <ScalarProperty Name="商品ID" ColumnName="商品ID" />
-          <ScalarProperty Name="订单号" ColumnName="订单号" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="购物车表">
-      <EntityTypeMapping TypeName="CosmeticsModel.购物车表">
-        <MappingFragment StoreEntitySet="购物车表">
-          <ScalarProperty Name="购物车ID" ColumnName="购物车ID" />
-          <ScalarProperty Name="商品ID" ColumnName="商品ID" />
-          <ScalarProperty Name="用户ID" ColumnName="用户ID" />
-          <ScalarProperty Name="数量" ColumnName="数量" />
-          <ScalarProperty Name="应付款" ColumnName="应付款" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="商品类型表">
-      <EntityTypeMapping TypeName="CosmeticsModel.商品类型表">
-        <MappingFragment StoreEntitySet="商品类型表">
-          <ScalarProperty Name="商品类型名称" ColumnName="商品类型名称" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="商品评论表">
-      <EntityTypeMapping TypeName="CosmeticsModel.商品评论表">
-        <MappingFragment StoreEntitySet="商品评论表">
-          <ScalarProperty Name="父级评论" ColumnName="父级评论" />
-          <ScalarProperty Name="订单明细ID" ColumnName="订单明细ID" />
-          <ScalarProperty Name="评论ID" ColumnName="评论ID" />
-          <ScalarProperty Name="用户ID" ColumnName="用户ID" />
-          <ScalarProperty Name="评论内容" ColumnName="评论内容" />
-          <ScalarProperty Name="评论时间" ColumnName="评论时间" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="商品信息表">
-      <EntityTypeMapping TypeName="CosmeticsModel.商品信息表">
-        <MappingFragment StoreEntitySet="商品信息表">
-          <ScalarProperty Name="商品品牌" ColumnName="商品品牌" />
-          <ScalarProperty Name="商品ID" ColumnName="商品ID" />
-          <ScalarProperty Name="商品名称" ColumnName="商品名称" />
-          <ScalarProperty Name="商品类型名称" ColumnName="商品类型名称" />
-          <ScalarProperty Name="商品单价" ColumnName="商品单价" />
-          <ScalarProperty Name="商品库存" ColumnName="商品库存" />
-          <ScalarProperty Name="商品规格" ColumnName="商品规格" />
-          <ScalarProperty Name="商品描述" ColumnName="商品描述" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="用户表">
-      <EntityTypeMapping TypeName="CosmeticsModel.用户表">
-        <MappingFragment StoreEntitySet="用户表">
-          <ScalarProperty Name="重置密码" ColumnName="重置密码" />
-          <ScalarProperty Name="用户ID" ColumnName="用户ID" />
-          <ScalarProperty Name="用户名" ColumnName="用户名" />
-          <ScalarProperty Name="登录密码" ColumnName="登录密码" />
-          <ScalarProperty Name="手机号" ColumnName="手机号" />
-          <ScalarProperty Name="邮箱" ColumnName="邮箱" />
-          <ScalarProperty Name="个人简介" ColumnName="个人简介" />
-          <ScalarProperty Name="头像" ColumnName="头像" />
-          <ScalarProperty Name="用户生日" ColumnName="用户生日" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="账户记录表">
-      <EntityTypeMapping TypeName="CosmeticsModel.账户记录表">
-        <MappingFragment StoreEntitySet="账户记录表">
-          <ScalarProperty Name="账户记录ID" ColumnName="账户记录ID" />
-          <ScalarProperty Name="充值金额" ColumnName="充值金额" />
-          <ScalarProperty Name="充值日期" ColumnName="充值日期" />
-          <ScalarProperty Name="期初金额" ColumnName="期初金额" />
-          <ScalarProperty Name="期末金额" ColumnName="期末金额" />
-          <ScalarProperty Name="支出金额" ColumnName="支出金额" />
-          <ScalarProperty Name="机器时间" ColumnName="机器时间" />
-          <ScalarProperty Name="摘要" ColumnName="摘要" />
-          <ScalarProperty Name="备注" ColumnName="备注" />
-          <ScalarProperty Name="用户ID" ColumnName="用户ID" />
+    <EntitySetMapping Name="User">
+      <EntityTypeMapping TypeName="CosmeticsModel.User">
+        <MappingFragment StoreEntitySet="User">
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="UserTel" ColumnName="UserTel" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Intro" ColumnName="Intro" />
+          <ScalarProperty Name="Photo" ColumnName="Photo" />
+          <ScalarProperty Name="Birthday" ColumnName="Birthday" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

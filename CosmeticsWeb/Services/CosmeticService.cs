@@ -23,10 +23,10 @@ namespace CosmeticsWeb.Services
         /// 返回所有记录
         /// </summary>
         /// <returns></returns>
-        public IEnumerable<商品信息表> GetAll()
+        public IEnumerable<Info> GetAll()
         {
             //根据分页要求，取当前页的记录集合
-            var model = _context.商品信息表.OrderBy(m => m.商品ID);
+            var model = _context.Info.OrderBy(m => m.CosmeticID);
             return model;
         }
 
@@ -35,10 +35,17 @@ namespace CosmeticsWeb.Services
         /// </summary>
         /// <param name="number"></param>
         /// <returns></returns>
-        public IEnumerable<商品信息表> GetAllByNumber(int number)
+        public IEnumerable<Info> GetAllByNumber(int number)
         {
             //根据分页要求，取当前页的记录集合
-            var model = _context.商品信息表.OrderBy(m => m.商品ID).Take(number);
+            var model = _context.Info.OrderBy(m => m.CosmeticID).Take(number);
+            return model;
+        }
+
+        public IEnumerable<Info> GetAllByLip()
+        {
+            //根据分页要求，取当前页的记录集合
+            var model = _context.Info.OrderBy(m => m.CosmeticID).Where(m => m.CosmeticType == "唇妆");
             return model;
         }
 
@@ -47,10 +54,10 @@ namespace CosmeticsWeb.Services
         /// </summary>
         /// <param name="number"></param>
         /// <returns></returns>
-        public IEnumerable<商品信息表> GetAllSearchByName(string name)
+        public IEnumerable<Info> GetAllSearchByName(string name)
         {
             //根据分页要求，取当前页的记录集合
-            var model = _context.商品信息表.OrderBy(m => m.商品ID).Where(m => m.商品名称.Contains(name));
+            var model = _context.Info.OrderBy(m =>m.CosmeticID).Where(m => m.CosmeticName.Contains(name));
             return model;
         }
 
@@ -60,10 +67,10 @@ namespace CosmeticsWeb.Services
         /// <param name="cosmeticsPerPage">每页记录数</param>
         /// <param name="currentPageNo">当前页数，从0开始</param>
         /// <returns>所求的单页数据</returns>
-        public IEnumerable<商品信息表> GetAllByPage(int cosmeticsPerPage, int currentPageNo)
+        public IEnumerable<Info> GetAllByPage(int cosmeticsPerPage, int currentPageNo)
         {
             //根据分页要求，取当前页的记录集合
-            var model = _context.商品信息表.OrderBy(m => m.商品ID)
+            var model = _context.Info.OrderBy(m => m.CosmeticID)
                 .Skip(cosmeticsPerPage * currentPageNo)
                 .Take(cosmeticsPerPage);
             return model;
@@ -76,7 +83,7 @@ namespace CosmeticsWeb.Services
         /// <returns>总页数</returns>
         public int GetPageCount(int cosmeticsPerPage)
         {
-            int countOfCosmetics = _context.商品信息表.Count();
+            int countOfCosmetics = _context.Info.Count();
             //计算页数
             double dblPageCount = countOfCosmetics / (cosmeticsPerPage*1.0);
             int pageCount = (int)Math.Ceiling(dblPageCount);
@@ -90,13 +97,11 @@ namespace CosmeticsWeb.Services
         public void Create(VmAdminCosmeticCreate model)
         {
             //向数据库插入数据
-            var newModel = new 商品信息表();
-            newModel.商品ID = Guid.NewGuid().ToString();
+            var newModel = new Info();
+            newModel.CosmeticID = Guid.NewGuid();
             // 将VmAdminCosmeticCreate类型的model变量里的内容复制到newModel
-            Util.CopyObjectData(model, newModel, "商品ID");
-            newModel.商品描述 = "";
-            newModel.商品品牌 = "";
-            _context.商品信息表.Add(newModel);
+            Util.CopyObjectData(model, newModel, "CosmeticID");
+            _context.Info.Add(newModel);
             _context.SaveChanges();
         }
 
@@ -107,7 +112,7 @@ namespace CosmeticsWeb.Services
         /// <returns></returns>
         public bool ValidateForNewCosmeticName(string newCosmeticName)
         {
-            return !_context.商品信息表.Any(m => m.商品名称 == newCosmeticName);
+            return !_context.Info.Any(m => m.CosmeticName == newCosmeticName);
         }
 
         /// <summary>
@@ -115,20 +120,20 @@ namespace CosmeticsWeb.Services
         /// </summary>
         /// <param name="newCosmeticName"></param>
         /// <returns></returns>
-        public bool ValidateForOldCosmeticName(string newCosmeticName, string cosmeticId)
+        public bool ValidateForOldCosmeticName(string newCosmeticName, System.Guid cosmeticId)
         {
-            return !_context.商品信息表.Any(m => m.商品名称 == newCosmeticName && m.商品ID != cosmeticId);
+            return !_context.Info.Any(m => m.CosmeticName == newCosmeticName && m.CosmeticID != cosmeticId);
         }
 
-        public 商品信息表 GetById(string id)
+        public Info GetById(System.Guid id)
         {
-            return _context.商品信息表.FirstOrDefault(m => m.商品ID==id);
+            return _context.Info.FirstOrDefault(m => m.CosmeticID==id);
         }
 
-        public VmAdminCosmeticEdit GetEditModelById(string id)
+        public VmAdminCosmeticEdit GetEditModelById(System.Guid id)
         {
             //从数据库中取出相应数据
-            var model = _context.商品信息表.FirstOrDefault(m =>m.商品ID==id);
+            var model = _context.Info.FirstOrDefault(m =>m.CosmeticID==id);
             //填充相应ViewModel
             var newModel = new VmAdminCosmeticEdit();
             Util.CopyObjectData(model, newModel);
@@ -142,18 +147,18 @@ namespace CosmeticsWeb.Services
         public void Edit(VmAdminCosmeticEdit model)
         {
             //向数据库插入数据
-            var newModel = _context.商品信息表.FirstOrDefault(m => m.商品ID == model.商品ID);
+            var newModel = _context.Info.FirstOrDefault( m => m.CosmeticID == model.CosmeticID);
             // 将VmAdminCosmeticEdit类型的model变量里的内容复制到newModel
-            Util.CopyObjectData(model, newModel, "商品ID");
+            Util.CopyObjectData(model, newModel, "CosmeticID");
 
             _context.SaveChanges();
         }
         public void EditMessage(VmContentEdit model)
         {
-            var item = _context.商品信息表.Find(model.Id);
+            var item = _context.Info.Find(model.Id);
             if (item != null)
             {
-                item.商品描述 = model.Content;
+                item.Description = model.Content;
                 _context.SaveChanges();
             }
         }

@@ -12,6 +12,6 @@ namespace CosmeticsWeb.Models.ViewModels.AdminType
         [Required(ErrorMessage="必填项")]
         [MaxLength(50,ErrorMessage ="长度限制50")]
         [Remote("RemoteValidateForNewType","AdminBookType",ErrorMessage="分类已经存在")]
-        public string 商品类型名称 { get; set; }//显示层UI
+        public string CosmeticName { get; set; }//显示层UI
     }
 }

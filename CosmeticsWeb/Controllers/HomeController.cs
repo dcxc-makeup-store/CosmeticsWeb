@@ -31,10 +31,17 @@ namespace CosmeticsWeb.Controllers
         /// </summary>
         /// <param name="number"></param>
         /// <returns></returns>
-        public ActionResult TopCosmetics()
+        public ActionResult TopCosmetics(int number)
         {
             //取数据
             var model = _cosmeticService.GetAllByNumber(4);
+            return View(model);
+        }
+
+        public ActionResult Lip()
+        {
+            //取数据
+            var model = _cosmeticService.GetAllByLip();
             return View(model);
         }
 

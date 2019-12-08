@@ -132,9 +132,20 @@
     <Compile Include="Controllers\AdminBookTypeController.cs" />
     <Compile Include="Controllers\AdminCosmeticController.cs" />
     <Compile Include="Controllers\AdminLoginController.cs" />
+    <Compile Include="Controllers\CartController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\UserCosmeticController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EF\Cart.cs">
+      <DependentUpon>Mycosmetics.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EF\Comment.cs">
+      <DependentUpon>Mycosmetics.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EF\Info.cs">
+      <DependentUpon>Mycosmetics.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\EF\Mycosmetics.Context.cs">
       <AutoGen>True</AutoGen>
@@ -151,56 +162,23 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Mycosmetics.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Models\EF\Mydata.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Mydata.Context.tt</DependentUpon>
+    <Compile Include="Models\EF\OrderDetail.cs">
+      <DependentUpon>Mycosmetics.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\EF\Mydata.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Mydata.tt</DependentUpon>
+    <Compile Include="Models\EF\OrderList.cs">
+      <DependentUpon>Mycosmetics.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\EF\Mydata.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Mydata.edmx</DependentUpon>
+    <Compile Include="Models\EF\Record.cs">
+      <DependentUpon>Mycosmetics.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\EF\sysdiagrams.cs">
       <DependentUpon>Mycosmetics.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\EF\供应商信息表.cs">
-      <DependentUpon>Mydata.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\EF\入库表.cs">
-      <DependentUpon>Mydata.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\EF\商品信息表.cs">
+    <Compile Include="Models\EF\Type.cs">
       <DependentUpon>Mycosmetics.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\EF\商品类型表.cs">
+    <Compile Include="Models\EF\User.cs">
       <DependentUpon>Mycosmetics.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\EF\商品评论表.cs">
-      <DependentUpon>Mycosmetics.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\EF\用户表.cs">
-      <DependentUpon>Mycosmetics.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\EF\订单明细表.cs">
-      <DependentUpon>Mycosmetics.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\EF\订单表.cs">
-      <DependentUpon>Mycosmetics.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\EF\账户记录表.cs">
-      <DependentUpon>Mycosmetics.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\EF\购物车表.cs">
-      <DependentUpon>Mycosmetics.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\EF\销售表.cs">
-      <DependentUpon>Mydata.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Main\AspFormsAuthentication.cs" />
     <Compile Include="Models\Main\Util.cs" />
@@ -211,6 +189,7 @@
     <Compile Include="Models\ViewModels\AdminCosmetic\VmContentEdit.cs" />
     <Compile Include="Models\ViewModels\AdminLogin\VmAdminLogin.cs" />
     <Compile Include="Models\ViewModels\AdminType\VmAdminTypeCreate.cs" />
+    <Compile Include="Models\ViewModels\Cart\Cart.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -241,6 +220,7 @@
     <Content Include="Images\KIKO口红.jpg" />
     <Content Include="Images\NYX眼影盘南瓜色.jpg" />
     <Content Include="Images\public.jpg" />
+    <Content Include="Images\主页图.jpg" />
     <Content Include="Images\曼秀雷敦唇膏.jpg" />
     <Content Include="Images\纪梵希08.jpg" />
     <Content Include="Images\纪梵希09.jpg" />
@@ -268,25 +248,8 @@
       <DependentUpon>Mycosmetics.edmx</DependentUpon>
       <LastGenOutput>Mycosmetics.cs</LastGenOutput>
     </Content>
-    <Content Include="Models\EF\Mydata.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Mydata.Context.cs</LastGenOutput>
-      <DependentUpon>Mydata.edmx</DependentUpon>
-    </Content>
-    <Content Include="Models\EF\Mydata.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Mydata.edmx</DependentUpon>
-      <LastGenOutput>Mydata.cs</LastGenOutput>
-    </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <EntityDeploy Include="Models\EF\Mydata.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>Mydata.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\EF\Mydata.edmx.diagram">
-      <DependentUpon>Mydata.edmx</DependentUpon>
-    </Content>
     <EntityDeploy Include="Models\EF\Mycosmetics.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>Mycosmetics.Designer.cs</LastGenOutput>
@@ -625,6 +588,12 @@
     <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Shared\_login.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
+    <Content Include="Views\UserCosmetic\_ViewStart.cshtml" />
+    <Content Include="Views\UserCosmetic\Detail.cshtml" />
+    <Content Include="Views\Cart\ShowMyCart.cshtml" />
+    <Content Include="Views\Cart\CartDetail.cshtml" />
+    <Content Include="Views\Cart\_ViewStart.cshtml" />
+    <Content Include="Views\Home\Lip.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

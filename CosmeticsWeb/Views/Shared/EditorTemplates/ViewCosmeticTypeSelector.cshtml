@@ -1,5 +1,5 @@
 ﻿@model string
-    <select name="商品类型名称" class="form-control">
+    <select name="CosmeticType" class="form-control">
             @foreach(var item in CosmeticsWeb.Models.Main.Util.AllCosmeticTypes())
             {
                 <option value="@item">@item</option>

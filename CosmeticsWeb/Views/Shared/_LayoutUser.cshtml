@@ -15,18 +15,27 @@
         <div class="navbar-collapse collapse" role="navigation">
             <ul class="nav navbar-nav">
                 @*<li>@Html.ActionLink("化妆品分类管理", "Index", "AdminBookType")</li>
-                    <li>@Html.ActionLink("化妆品管理", "Index", "AdminCosmetic")</li>*@
+            <li>@Html.ActionLink("化妆品管理", "Index", "AdminCosmetic")</li>*@
             </ul>
             <ul class="nav navbar-nav navbar-right hidden-sm">
                 <li>
-                    <a href="#">hello</a>
+                    <!-- 判断用户是否已经登录，显示对应的信息 -->
+                    @if (Session["userNow"] == null)
+                    {
+                        @Html.ActionLink("你好，请登录", "Login", "Account")
+                    }
+                    else
+                    {
+                        CosmeticsWeb.Models.EF.User userNow = Session["userNow"] as CosmeticsWeb.Models.EF.User;
+                        <span> @userNow.UserName </span>
+                    }
                 </li>
                 <li>
-                    @Html.ActionLink("管理员登录", "Index", "AdminLogin")
-
+                    @Html.ActionLink("免费注册", "Register", "Account")
                 </li>
-                <li>
-                    @Html.ActionLink("注册", "Register", "Account")
+                <li id="cartarea">
+                    <!--购物车-->
+                    @Html.Action("ShowMyCart", "Cart")
                 </li>
             </ul>
         </div>

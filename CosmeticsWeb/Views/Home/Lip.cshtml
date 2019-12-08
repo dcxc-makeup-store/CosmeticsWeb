@@ -1,0 +1,31 @@
+﻿@model IEnumerable<CosmeticsWeb.Models.EF.Info>
+
+@{
+    ViewBag.Title = "Lip";
+}
+
+@foreach (var item in Model)
+{
+    <a href="/UserCosmetic/Detail/@item.CosmeticID">
+        <div class="col-md-3">
+            <div class="panel panel-default">
+                <div class="panel-heading">@item.CosmeticName</div>
+                <div class="panel-body">
+                    <p class="row">
+                        <img src="~/Images/阿玛尼206.jpg" class="col-md-10 col-md-offset-1" />
+                    </p>
+                    <p class="row">
+                        <div class="col-md-10 col-md-offset-1">
+                            类别：@item.CosmeticType
+                        </div>
+                    </p>
+                    <p class="row">
+                        <div class="col-md-10 col-md-offset-1">
+                            价格：@CosmeticsWeb.Models.Main.Util.ConvertMoneyToString(item.Price)元
+                        </div>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </a>
+}

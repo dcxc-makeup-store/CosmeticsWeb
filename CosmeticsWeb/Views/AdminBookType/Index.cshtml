@@ -1,4 +1,4 @@
-﻿@model IEnumerable<CosmeticsWeb.Models.EF.商品类型表>
+﻿@model IEnumerable<CosmeticsWeb.Models.EF.Type>
 
 @{
     ViewBag.Title = "类型管理";
@@ -16,7 +16,7 @@
     <tr>
         <th>
             <h4>
-                @Html.DisplayNameFor(model => model.商品类型名称)
+                @Html.DisplayNameFor(model => model.CosmeticType)
             </h4>
 </th>
         <th></th>
@@ -26,12 +26,12 @@
     <tr>
         <td>
             <h5>
-                @Html.DisplayFor(modelItem => item.商品类型名称)
+                @Html.DisplayFor(modelItem => item.CosmeticType)
             </h5>
         </td>
         <td>
          <h5>
-            <a href="#" class="mya" data="@item.商品类型名称"><i class="glyphicon glyphicon-trash"></i></a>
+            <a href="#" class="mya" data="@item.CosmeticType"><i class="glyphicon glyphicon-trash"></i></a>
         </h5>
         </td>
     </tr>

@@ -12,17 +12,13 @@ namespace CosmeticsWeb.Models.EF
     using System;
     using System.Collections.Generic;
     
-    public partial class 销售表
+    public partial class OrderDetail
     {
-        public int 销售编号 { get; set; }
-        public string 商品编号 { get; set; }
-        public int 销售数量 { get; set; }
-        public decimal 销售单价 { get; set; }
-        public System.DateTime 销售时间 { get; set; }
-        public decimal 小计 { get; set; }
-        public System.DateTime 失效期 { get; set; }
-        public string 商品规格 { get; set; }
-    
-        public virtual 商品信息表 商品信息表 { get; set; }
+        public System.Guid OrderDetailID { get; set; }
+        public int CosmeticNum { get; set; }
+        public decimal Price { get; set; }
+        public System.Guid CosmeticID { get; set; }
+        public System.Guid OrderListID { get; set; }
+        public string Remark { get; set; }
     }
 }

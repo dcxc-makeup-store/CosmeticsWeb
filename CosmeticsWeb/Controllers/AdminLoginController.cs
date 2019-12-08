@@ -1,4 +1,4 @@
-﻿using BookStoreWeb.Models.Main;
+﻿using CosmeticsWeb.Models.Main;
 using CosmeticsWeb.Models.ViewModels.AdminLogin;
 using System;
 using System.Collections.Generic;

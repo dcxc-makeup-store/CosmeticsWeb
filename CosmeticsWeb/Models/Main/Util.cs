@@ -15,14 +15,14 @@ namespace CosmeticsWeb.Models.Main
         /// 返回所有的化妆品类型
         /// </summary>
         /// <returns></returns>
-        
+
         public static List<string> AllCosmeticTypes()
         {
             var da = new CosmeticsEntities();
-            return da.商品类型表.Select(m => m.商品类型名称).ToList();
+            return da.Type.Select(m => m.CosmeticType).ToList();
 
         }
-        ///<summary>
+        /// <summary>
         /// Copies the data of one object to another. The target object 'pulls' properties of the first.
         /// This any matching properties are written to the target.
         ///
@@ -32,7 +32,7 @@ namespace CosmeticsWeb.Models.Main
         /// <param name="source">The source object to copy from</param>
         /// <param name="target">The object to copy to</param>
         /// <param name="excludedProperties">A comma delimited list of properties that should not be copied</param>
-        public static void CopyObjectData(object source, object target, string excludedProperties="")
+        public static void CopyObjectData(object source, object target, string excludedProperties = "")
         {
             //string[] excluded = null;
             var excluded = new List<string>();
@@ -74,16 +74,19 @@ namespace CosmeticsWeb.Models.Main
         {
             return String.Format("{0:#,##0.00}", money);
         }
-        public static string StringToMD5Hash(string inputString)
+
+        /// <summary>
+        ///     32位MD5加密
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        public static string Md5Hash(string input)
         {
-            MD5CryptoServiceProvider md5 = new MD5CryptoServiceProvider();
-            byte[] encryptedBytes = md5.ComputeHash(Encoding.ASCII.GetBytes(inputString));
-            StringBuilder sb = new StringBuilder();
-            for (int i = 0; i < encryptedBytes.Length; i++)
-            {
-                sb.AppendFormat("{0:x2}", encryptedBytes[i]);
-            }
-            return sb.ToString();
+            var md5Hasher = new MD5CryptoServiceProvider();
+            var data = md5Hasher.ComputeHash(Encoding.Default.GetBytes(input));
+            var sBuilder = new StringBuilder();
+            foreach (var t in data) sBuilder.Append(t.ToString("x2"));
+            return sBuilder.ToString();
         }
     }
 }

@@ -7,7 +7,7 @@ namespace CosmeticsWeb.Models.ViewModels.AdminCosmetic
 {
     public class VmContentEdit
     {
-        public String Id { get; set; }
+        public System.Guid Id { get; set; }
         public String Content { get; set; }
     }
 }

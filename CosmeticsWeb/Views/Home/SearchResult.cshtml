@@ -1,4 +1,4 @@
-﻿@model IEnumerable<CosmeticsWeb.Models.EF.商品信息表>
+﻿@model IEnumerable<CosmeticsWeb.Models.EF.Info>
 
 @{
     ViewBag.Title = "SearchResult";
@@ -12,28 +12,25 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.商品ID)
+            @Html.DisplayNameFor(model => model.CosmeticName)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.商品名称)
+            @Html.DisplayNameFor(model => model.CosmeticType)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.商品类型名称)
+            @Html.DisplayNameFor(model => model.Price)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.商品单价)
+            @Html.DisplayNameFor(model => model.Stock)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.商品库存)
+            @Html.DisplayNameFor(model => model.Specification)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.商品规格)
+            @Html.DisplayNameFor(model => model.Description)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.商品描述)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.商品品牌)
+            @Html.DisplayNameFor(model => model.Logo)
         </th>
         <th></th>
     </tr>
@@ -41,34 +38,28 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.商品ID)
+            @Html.DisplayFor(modelItem => item.CosmeticName)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.商品名称)
+            @Html.DisplayFor(modelItem => item.CosmeticType)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.商品类型名称)
+            @Html.DisplayFor(modelItem => item.Price)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.商品单价)
+            @Html.DisplayFor(modelItem => item.Stock)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.商品库存)
+            @Html.DisplayFor(modelItem => item.Specification)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.商品规格)
+            @Html.DisplayFor(modelItem => item.Description)
+
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.商品描述)
+            @Html.DisplayFor(modelItem => item.Logo)
         </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.商品品牌)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-        </td>
+        
     </tr>
 }
 

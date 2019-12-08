@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Security;
 
-namespace BookStoreWeb.Models.Main
+namespace CosmeticsWeb.Models.Main
 {
     /// <summary>
     /// ASP.NET Forms身份验证

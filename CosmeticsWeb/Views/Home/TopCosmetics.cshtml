@@ -1,24 +1,24 @@
-﻿@model IEnumerable<CosmeticsWeb.Models.EF.商品信息表>
+﻿@model IEnumerable<CosmeticsWeb.Models.EF.Info>
 
 
 @foreach (var item in Model)
 {
-    <a href="/AdminCosmetic/Detail/@item.商品ID">
+    <a href="/UserCosmetic/Detail/@item.CosmeticID">
         <div class="col-md-3">
             <div class="panel panel-default">
-                <div class="panel-heading">@item.商品名称</div>
+                <div class="panel-heading">@item.CosmeticName</div>
                 <div class="panel-body">
                     <p class="row">
                         <img src="~/Images/阿玛尼206.jpg" class="col-md-10 col-md-offset-1" />
                     </p>
                     <p class="row">
                         <div class="col-md-10 col-md-offset-1">
-                            类别：@item.商品类型名称
+                           类别：@item.CosmeticType
                         </div>
                     </p>
                     <p class="row">
                         <div class="col-md-10 col-md-offset-1">
-                            价格：@CosmeticsWeb.Models.Main.Util.ConvertMoneyToString(item.商品单价)元
+                            价格：@CosmeticsWeb.Models.Main.Util.ConvertMoneyToString(item.Price)元
                         </div>
                     </p>
                 </div>

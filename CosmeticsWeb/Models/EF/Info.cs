@@ -12,14 +12,15 @@ namespace CosmeticsWeb.Models.EF
     using System;
     using System.Collections.Generic;
     
-    public partial class 购物车表
+    public partial class Info
     {
-        public string 购物车ID { get; set; }
-        public string 商品ID { get; set; }
-        public string 用户ID { get; set; }
-        public int 数量 { get; set; }
-        public decimal 应付款 { get; set; }
-    
-        public virtual 用户表 用户表 { get; set; }
+        public System.Guid CosmeticID { get; set; }
+        public string CosmeticName { get; set; }
+        public string CosmeticType { get; set; }
+        public decimal Price { get; set; }
+        public Nullable<int> Stock { get; set; }
+        public string Specification { get; set; }
+        public string Description { get; set; }
+        public string Logo { get; set; }
     }
 }
