@@ -1,0 +1,12 @@
+﻿
+当前系统时间：2019-10-28
+<hr />
+@System.DateTime.Now.ToString();
+当前客户端时间： <span id="timenow"></span>
+<hr />
+@for (int i=0;i<10;i++)
+{
+    <li>@(i+1)</li>
+}
+<hr />
+@Html.ActionLink("首页", "Index","Home")

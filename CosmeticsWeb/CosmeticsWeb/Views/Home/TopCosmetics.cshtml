@@ -1,0 +1,28 @@
+﻿@model IEnumerable<CosmeticsWeb.Models.EF.Info>
+
+
+@foreach (var item in Model)
+{
+    <a href="/UserCosmetic/Detail/@item.CosmeticID">
+        <div class="col-md-3">
+            <div class="panel panel-default">
+                <div class="panel-heading">@item.CosmeticName</div>
+                <div class="panel-body">
+                    <p class="row">
+                        <img src="~/Images/public.jpg" class="col-md-10 col-md-offset-1" />
+                    </p>
+                    <p class="row ">
+                        <div class="col-md-10 col-md-offset-1">
+                            品牌：@item.Logo
+                        </div>
+                    </p>
+                    <p class="row">
+                        <div class="col-md-10 col-md-offset-1">
+                            价格: @CosmeticsWeb.Models.Main.Util.ConvertMoneyToString(item.Price) 元
+                        </div>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </a>
+}
